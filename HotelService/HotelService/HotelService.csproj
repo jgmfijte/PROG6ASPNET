@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BoekingController.cs" />
     <Compile Include="Controllers\GastController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KamerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -123,6 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\591645.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -135,12 +137,30 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Boeking\" />
-    <Folder Include="Views\Gast\" />
-    <Folder Include="Views\Kamer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Boeking\BoekingOverzicht.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Boeking\BoekingNieuw.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gast\GastNieuw.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Kamer\KamerNieuw.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Kamer\KamerOverzicht.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gast\GastOverzicht.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
