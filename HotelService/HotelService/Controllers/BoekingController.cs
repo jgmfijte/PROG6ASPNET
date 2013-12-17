@@ -16,5 +16,14 @@ namespace HotelService.Controllers
             return View();
         }
 
+        public ActionResult BoekingOverzicht()
+        {
+            return View();
+        }
+
+        public ActionResult KamerNieuw()
+        {
+            return View();
+        }
     }
 }
