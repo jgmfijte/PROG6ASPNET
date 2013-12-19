@@ -1,11 +1,19 @@
 body {
     font-family: Calibri, Verdana, Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     color:#333
 }
 
+th {
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight:bold;
+    text-align:left;
+}
+
 td {
-    font-size: 12px;
+    font-size: 14px;
+    padding-left: 15px;
 }
 
 p {
@@ -15,12 +23,12 @@ p {
 
 a {
     color: #333;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 a:active {
     color: #cdeaf7;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 

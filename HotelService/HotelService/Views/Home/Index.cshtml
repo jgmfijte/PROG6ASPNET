@@ -2,7 +2,7 @@
     ViewBag.Title = "Index";
 }
 
-<link href="./Content/591645.css" rel="stylesheet" type="text/css" />
+<link href="./Content/StyleSheet.css" rel="stylesheet" type="text/css" />
 <div id="wrapper">
     <div id="headerwrap">
         <div id="header"> <h1> HotelService </h1></div>
@@ -10,7 +10,7 @@
     <div id="menuwrap">
         <div id="menu">
             <p> 
-                @Html.ActionLink("Home", "Index", "Home", new { @class="roundedButton"}) | 
+                @Html.ActionLink("Home", "Index", "Home") | 
                 @Html.ActionLink("Kamers", "KamerOverzicht", "Kamer") | 
                 @Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
                 @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking")

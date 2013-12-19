@@ -124,7 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\591645.css" />
+    <Content Include="Content\StyleSheet.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -161,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Gast\GastOverzicht.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gast\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

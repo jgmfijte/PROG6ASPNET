@@ -25,5 +25,10 @@ namespace HotelService.Controllers
         {
             return View();
         }
+
+        public ActionResult Details()
+        {
+            return View();
+        }
     }
 }
