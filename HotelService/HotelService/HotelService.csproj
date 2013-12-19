@@ -119,6 +119,8 @@
     <Compile Include="Models\Gast.cs" />
     <Compile Include="Models\Kamer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DummyKamerRepo.cs" />
+    <Compile Include="Repositories\IKamerRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
