@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PROG6ASPNETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Boekingen">
+          <Key>
+            <PropertyRef Name="Startdatum" />
+            <PropertyRef Name="Einddatum" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Boeking_KlantNr" />
+            <PropertyRef Name="Boeking_KamerNr" />
+          </Key>
+          <Property Name="Startdatum" Type="date" Nullable="false" />
+          <Property Name="Einddatum" Type="date" Nullable="false" />
+          <Property Name="Prijs" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="FactuurAdres" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bankrekening" Type="bigint" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Boeking_KlantNr" Type="int" Nullable="false" />
+          <Property Name="Boeking_KamerNr" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hotelkamers">
+          <Key>
+            <PropertyRef Name="KamerNummer" />
+          </Key>
+          <Property Name="KamerNummer" Type="int" Nullable="false" />
+          <Property Name="AantalPersonen" Type="int" Nullable="false" />
+          <Property Name="MinimumPrijs" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActuelePrijs" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Klanten">
+          <Key>
+            <PropertyRef Name="KlantNummer" />
+          </Key>
+          <Property Name="KlantNummer" Type="int" Nullable="false" />
+          <Property Name="Voornaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tussenvoegsel" Type="nvarchar" MaxLength="10" />
+          <Property Name="Geboortedatum" Type="date" Nullable="false" />
+          <Property Name="Geslacht" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postcode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Woonplaats" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="Boeking_KamerNummer">
+          <End Role="Hotelkamers" Type="Self.Hotelkamers" Multiplicity="1" />
+          <End Role="Boekingen" Type="Self.Boekingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotelkamers">
+              <PropertyRef Name="KamerNummer" />
+            </Principal>
+            <Dependent Role="Boekingen">
+              <PropertyRef Name="Boeking_KamerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Boeking_KlantNummer">
+          <End Role="Klanten" Type="Self.Klanten" Multiplicity="1" />
+          <End Role="Boekingen" Type="Self.Boekingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klanten">
+              <PropertyRef Name="KlantNummer" />
+            </Principal>
+            <Dependent Role="Boekingen">
+              <PropertyRef Name="Boeking_KlantNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PROG6ASPNETModelStoreContainer">
+          <EntitySet Name="Hotelkamers" EntityType="Self.Hotelkamers" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Klanten" EntityType="Self.Klanten" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Boekingen" EntityType="Self.Boekingen" p3:Type="Tables" p3:Schema="dbo" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+            <DefiningQuery>SELECT 
+    [Boekingen].[Startdatum] AS [Startdatum], 
+    [Boekingen].[Einddatum] AS [Einddatum], 
+    [Boekingen].[Prijs] AS [Prijs], 
+    [Boekingen].[FactuurAdres] AS [FactuurAdres], 
+    [Boekingen].[Bankrekening] AS [Bankrekening], 
+    [Boekingen].[Status] AS [Status], 
+    [Boekingen].[Boeking_KlantNr] AS [Boeking_KlantNr], 
+    [Boekingen].[Boeking_KamerNr] AS [Boeking_KamerNr]
+    FROM [dbo].[Boekingen] AS [Boekingen]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Boeking_KamerNummer" Association="Self.Boeking_KamerNummer">
+            <End Role="Hotelkamers" EntitySet="Hotelkamers" />
+            <End Role="Boekingen" EntitySet="Boekingen" />
+          </AssociationSet>
+          <AssociationSet Name="Boeking_KlantNummer" Association="Self.Boeking_KlantNummer">
+            <End Role="Klanten" EntitySet="Klanten" />
+            <End Role="Boekingen" EntitySet="Boekingen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PROG6ASPNETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Hotelkamers">
+          <Key>
+            <PropertyRef Name="KamerNummer" />
+          </Key>
+          <Property Name="KamerNummer" Type="Int32" Nullable="false" />
+          <Property Name="AantalPersonen" Type="Int32" Nullable="false" />
+          <Property Name="MinimumPrijs" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActuelePrijs" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Boekingen" Relationship="Self.Boeking_KamerNummer" FromRole="Hotelkamers" ToRole="Boekingen" />
+        </EntityType>
+        <EntityType Name="Klanten">
+          <Key>
+            <PropertyRef Name="KlantNummer" />
+          </Key>
+          <Property Name="KlantNummer" Type="Int32" Nullable="false" />
+          <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tussenvoegsel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Geboortedatum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Geslacht" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Postcode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Woonplaats" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Boekingen" Relationship="Self.Boeking_KlantNummer" FromRole="Klanten" ToRole="Boekingen" />
+        </EntityType>
+        <EntityType Name="Boekingen">
+          <Key>
+            <PropertyRef Name="Startdatum" />
+            <PropertyRef Name="Einddatum" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Boeking_KlantNr" />
+            <PropertyRef Name="Boeking_KamerNr" />
+          </Key>
+          <Property Name="Startdatum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Einddatum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Prijs" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FactuurAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bankrekening" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Boeking_KlantNr" Type="Int32" Nullable="false" />
+          <Property Name="Boeking_KamerNr" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hotelkamers" Relationship="Self.Boeking_KamerNummer" FromRole="Boekingen" ToRole="Hotelkamers" />
+          <NavigationProperty Name="Klanten" Relationship="Self.Boeking_KlantNummer" FromRole="Boekingen" ToRole="Klanten" />
+        </EntityType>
+        <Association Name="Boeking_KamerNummer">
+          <End Role="Hotelkamers" Type="Self.Hotelkamers" Multiplicity="1" />
+          <End Role="Boekingen" Type="Self.Boekingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotelkamers">
+              <PropertyRef Name="KamerNummer" />
+            </Principal>
+            <Dependent Role="Boekingen">
+              <PropertyRef Name="Boeking_KamerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Boeking_KlantNummer">
+          <End Role="Klanten" Type="Self.Klanten" Multiplicity="1" />
+          <End Role="Boekingen" Type="Self.Boekingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klanten">
+              <PropertyRef Name="KlantNummer" />
+            </Principal>
+            <Dependent Role="Boekingen">
+              <PropertyRef Name="Boeking_KlantNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PROG6ASPNETEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Hotelkamers" EntityType="Self.Hotelkamers" />
+          <EntitySet Name="Klanten" EntityType="Self.Klanten" />
+          <EntitySet Name="Boekingen" EntityType="Self.Boekingen" />
+          <AssociationSet Name="Boeking_KamerNummer" Association="Self.Boeking_KamerNummer">
+            <End Role="Hotelkamers" EntitySet="Hotelkamers" />
+            <End Role="Boekingen" EntitySet="Boekingen" />
+          </AssociationSet>
+          <AssociationSet Name="Boeking_KlantNummer" Association="Self.Boeking_KlantNummer">
+            <End Role="Klanten" EntitySet="Klanten" />
+            <End Role="Boekingen" EntitySet="Boekingen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PROG6ASPNETModelStoreContainer" CdmEntityContainer="PROG6ASPNETEntities">
+          <EntitySetMapping Name="Hotelkamers">
+            <EntityTypeMapping TypeName="PROG6ASPNETModel.Hotelkamers">
+              <MappingFragment StoreEntitySet="Hotelkamers">
+                <ScalarProperty Name="KamerNummer" ColumnName="KamerNummer" />
+                <ScalarProperty Name="AantalPersonen" ColumnName="AantalPersonen" />
+                <ScalarProperty Name="MinimumPrijs" ColumnName="MinimumPrijs" />
+                <ScalarProperty Name="ActuelePrijs" ColumnName="ActuelePrijs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klanten">
+            <EntityTypeMapping TypeName="PROG6ASPNETModel.Klanten">
+              <MappingFragment StoreEntitySet="Klanten">
+                <ScalarProperty Name="KlantNummer" ColumnName="KlantNummer" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+                <ScalarProperty Name="tussenvoegsel" ColumnName="tussenvoegsel" />
+                <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
+                <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Woonplaats" ColumnName="Woonplaats" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boekingen">
+            <EntityTypeMapping TypeName="PROG6ASPNETModel.Boekingen">
+              <MappingFragment StoreEntitySet="Boekingen">
+                <ScalarProperty Name="Startdatum" ColumnName="Startdatum" />
+                <ScalarProperty Name="Einddatum" ColumnName="Einddatum" />
+                <ScalarProperty Name="Prijs" ColumnName="Prijs" />
+                <ScalarProperty Name="FactuurAdres" ColumnName="FactuurAdres" />
+                <ScalarProperty Name="Bankrekening" ColumnName="Bankrekening" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Boeking_KlantNr" ColumnName="Boeking_KlantNr" />
+                <ScalarProperty Name="Boeking_KamerNr" ColumnName="Boeking_KamerNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
