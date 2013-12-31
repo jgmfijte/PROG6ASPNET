@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccessLayer;
+using HotelService.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +12,7 @@ namespace HotelService.Controllers
     {
         //
         // GET: /Gast/
+        DatabaseClassesDataContext context = SingletonDatabase.Instance;
 
         public ActionResult Index()
         {
@@ -18,7 +21,10 @@ namespace HotelService.Controllers
 
         public ActionResult GastOverzicht()
         {
-            return View();
+            var result =
+                from k in context.Klantens
+                select k;
+            return View(result);
         }
 
         public ActionResult GastNieuw()

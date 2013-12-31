@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IQueryable<DataAccessLayer.Hotelkamer>
+
+@{
     ViewBag.Title = "Overzicht";
 }
 
@@ -31,16 +33,15 @@
                     <th>Kamer nummer</th>
                     <th>Aantal Personen</th>
                     <th>Prijs per nacht</th>
+                    <th>Minimum prijs</th>
                 </tr>
 
-                @*@foreach (var item in Model) { *@
-
-                @for (int i = 0; i < 10; i++)
-                {
+                @foreach (var kamer in Model) {
                     <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>35,-</td>
+                        <td>@kamer.KamerNummer</td>
+                        <td>@kamer.AantalPersonen</td>
+                        <td>@kamer.ActuelePrijs</td>
+                        <td>@kamer.MinimumPrijs</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })

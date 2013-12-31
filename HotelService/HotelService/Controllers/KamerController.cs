@@ -1,4 +1,4 @@
-﻿using HotelService.Repositories;
+﻿using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +9,11 @@ namespace HotelService.Controllers
 {
     public class KamerController : Controller
     {
-        private IKamerRepo kamerRepo;
-
-        public KamerController()
-        {
-            kamerRepo = new DummyKamerRepo();
-        }
         
         //
         // GET: /Kamer/
+
+        DatabaseClassesDataContext context = new DatabaseClassesDataContext();
 
         public ActionResult Index()
         {
@@ -26,7 +22,11 @@ namespace HotelService.Controllers
 
         public ActionResult KamerOverzicht()
         {
-            return View();
+            var result =
+                from k in context.Hotelkamers
+                select k;
+            return View(result);
+        
         }
 
         public ActionResult KamerNieuw()

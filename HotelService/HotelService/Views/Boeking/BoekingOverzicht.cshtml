@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HotelService.Models.Boeking>
+﻿@model IQueryable<DataAccessLayer.Boekingen>
 
 @{
     ViewBag.Title = "BoekingOverzicht";
@@ -35,15 +35,12 @@
                     <th>KlantID</th>
                 </tr>
 
-                @*@foreach (var item in Model) { *@
-
-                 @for (int i = 0; i < 10; i++)
-                {
+                @foreach (var boeking in Model) { 
                     <tr>
-                        <td>1</td>
-                        <td>18-12-2013</td>
-                        <td>25-12-2013</td>
-                        <td>1234</td>
+                        <td>@boeking.BoekingsNr</td>
+                        <td>@boeking.Startdatum</td>
+                        <td>@boeking.Einddatum</td>
+                        <td>@boeking.Boeking_KlantNr</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                             @Html.ActionLink("Klant Details", "Details", new { /* id=item.PrimaryKey */ }) |

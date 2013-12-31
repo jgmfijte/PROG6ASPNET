@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HotelService.Models.Gast>
+﻿@model IQueryable<DataAccessLayer.Klanten>
 
 @{
     ViewBag.Title = "GastOverzicht";
@@ -40,19 +40,16 @@
                     <th>E-mail</th>
                 </tr>
 
-                @*@foreach (var item in Model) { *@
-
-                @for (int i = 0; i < 10; i++)
-                {
+                @foreach (DataAccessLayer.Klanten klant in Model) {
                     <tr>
-                        <td>Suzanne</td>
-                        <td>Jenniskens</td>
-                        <td>5-4-1996</td>
-                        <td>V</td>
-                        <td>Onderwijsboulevard 103X</td>
-                        <td>5223 DE</td>
-                        <td>'s-Hertogenbosch</td>
-                        <td>swhjenni@student.avans.nl</td>
+                        <td>@klant.Voornaam</td>
+                        <td>@klant.Achternaam</td>
+                        <td>@klant.Geboortedatum</td>
+                        <td>@klant.Geslacht</td>
+                        <td>@klant.Adres</td>
+                        <td>@klant.Postcode</td>
+                        <td>@klant.Woonplaats</td>
+                        <td>@klant.Email</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
