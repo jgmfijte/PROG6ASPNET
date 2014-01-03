@@ -153,15 +153,6 @@
     <Content Include="Views\Boeking\BoekingOverzicht.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Boeking\BoekingNieuw.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Gast\GastNieuw.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Kamer\KamerNieuw.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Kamer\KamerOverzicht.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +169,21 @@
       <Project>{ee7d00b8-bced-4679-b923-867c29e38194}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Boeking\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Boeking\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Boeking\Delete.cshtml" />
+    <Content Include="Views\Gast\Create.cshtml" />
+    <Content Include="Views\Gast\Delete.cshtml" />
+    <Content Include="Views\Kamer\Create.cshtml" />
+    <Content Include="Views\Kamer\Edit.cshtml" />
+    <Content Include="Views\Kamer\Delete.cshtml" />
+    <Content Include="Views\Gast\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

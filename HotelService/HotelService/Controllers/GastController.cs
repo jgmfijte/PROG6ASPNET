@@ -27,7 +27,7 @@ namespace HotelService.Controllers
             return View(result);
         }
 
-        public ActionResult GastNieuw()
+        public ActionResult Create()
         {
             return View();
         }
@@ -35,6 +35,16 @@ namespace HotelService.Controllers
         public ActionResult Details()
         {
             return View();
+        }
+
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+        public ActionResult Edit()
+        { 
+            return View(); 
         }
     }
 }

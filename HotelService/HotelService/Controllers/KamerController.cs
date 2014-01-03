@@ -29,7 +29,17 @@ namespace HotelService.Controllers
         
         }
 
-        public ActionResult KamerNieuw()
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+        public ActionResult Edit()
         {
             return View();
         }

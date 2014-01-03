@@ -30,21 +30,24 @@
             <table>
                 <tr>
                     <th>ID</th>
+                    <th>Kamernummer</th>
                     <th>Startdatum</th>
                     <th>Einddatum</th>
                     <th>KlantID</th>
                 </tr>
 
-                @foreach (var boeking in Model) { 
+                @foreach (var boeking in Model)
+                { 
                     <tr>
                         <td>@boeking.BoekingsNr</td>
+                        <td>@boeking.Boeking_KamerNr</td>
                         <td>@boeking.Startdatum</td>
                         <td>@boeking.Einddatum</td>
                         <td>@boeking.Boeking_KlantNr</td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Klant Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | 
+                            <a href= "#" onclick="OpenDeleteWarning()">Delete</a> | 
+                            @Html.ActionLink("Klant Details", "Details", "Gast")
                         </td>
                     </tr>
                 }
@@ -58,3 +61,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function OpenDeleteWarning() {
+        var userWidth = screen.availWidth;
+        var userHeight = screen.availHeight;
+        leftPos = (userWidth - 300) / 2,
+        topPos = (userHeight - 180) / 2;
+        settings = 'modal,scrollBars=no,resizable=no,toolbar=no,menubar=no,location=no,directories=no,left=' + leftPos + ',top=' + topPos + ',width=300, height=180';
+
+        window.open("Delete", "popup", settings);
+    }
+    </script>
