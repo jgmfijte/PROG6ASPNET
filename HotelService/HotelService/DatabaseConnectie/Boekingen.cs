@@ -22,6 +22,7 @@ namespace HotelService.Database
         public string Status { get; set; }
         public int Boeking_KlantNr { get; set; }
         public int Boeking_KamerNr { get; set; }
+        public int BoekingsNr { get; set; }
     
         public virtual Hotelkamers Hotelkamers { get; set; }
         public virtual Klanten Klanten { get; set; }

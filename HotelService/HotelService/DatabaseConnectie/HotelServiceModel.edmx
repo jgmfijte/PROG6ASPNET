@@ -4,16 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PROG6ASPNETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="PROG6ASPNETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Boekingen">
           <Key>
-            <PropertyRef Name="Startdatum" />
-            <PropertyRef Name="Einddatum" />
-            <PropertyRef Name="Status" />
-            <PropertyRef Name="Boeking_KlantNr" />
-            <PropertyRef Name="Boeking_KamerNr" />
+            <PropertyRef Name="BoekingsNr" />
           </Key>
           <Property Name="Startdatum" Type="date" Nullable="false" />
           <Property Name="Einddatum" Type="date" Nullable="false" />
@@ -23,6 +17,7 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Boeking_KlantNr" Type="int" Nullable="false" />
           <Property Name="Boeking_KamerNr" Type="int" Nullable="false" />
+          <Property Name="BoekingsNr" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Hotelkamers">
           <Key>
@@ -47,6 +42,16 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
           <Property Name="Postcode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Woonplaats" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="Boeking_KamerNummer">
           <End Role="Hotelkamers" Type="Self.Hotelkamers" Multiplicity="1" />
@@ -73,20 +78,10 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PROG6ASPNETModelStoreContainer">
+          <EntitySet Name="Boekingen" EntityType="Self.Boekingen" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="Hotelkamers" EntityType="Self.Hotelkamers" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="Klanten" EntityType="Self.Klanten" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Boekingen" EntityType="Self.Boekingen" p3:Type="Tables" p3:Schema="dbo" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
-            <DefiningQuery>SELECT 
-    [Boekingen].[Startdatum] AS [Startdatum], 
-    [Boekingen].[Einddatum] AS [Einddatum], 
-    [Boekingen].[Prijs] AS [Prijs], 
-    [Boekingen].[FactuurAdres] AS [FactuurAdres], 
-    [Boekingen].[Bankrekening] AS [Bankrekening], 
-    [Boekingen].[Status] AS [Status], 
-    [Boekingen].[Boeking_KlantNr] AS [Boeking_KlantNr], 
-    [Boekingen].[Boeking_KamerNr] AS [Boeking_KamerNr]
-    FROM [dbo].[Boekingen] AS [Boekingen]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="Boeking_KamerNummer" Association="Self.Boeking_KamerNummer">
             <End Role="Hotelkamers" EntitySet="Hotelkamers" />
             <End Role="Boekingen" EntitySet="Boekingen" />
@@ -96,8 +91,7 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
             <End Role="Boekingen" EntitySet="Boekingen" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PROG6ASPNETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -134,6 +128,7 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
             <PropertyRef Name="Status" />
             <PropertyRef Name="Boeking_KlantNr" />
             <PropertyRef Name="Boeking_KamerNr" />
+            <PropertyRef Name="BoekingsNr" />
           </Key>
           <Property Name="Startdatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Einddatum" Type="DateTime" Nullable="false" Precision="0" />
@@ -145,6 +140,7 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
           <Property Name="Boeking_KamerNr" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Hotelkamers" Relationship="Self.Boeking_KamerNummer" FromRole="Boekingen" ToRole="Hotelkamers" />
           <NavigationProperty Name="Klanten" Relationship="Self.Boeking_KlantNummer" FromRole="Boekingen" ToRole="Klanten" />
+          <Property Name="BoekingsNr" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="Boeking_KamerNummer">
           <End Role="Hotelkamers" Type="Self.Hotelkamers" Multiplicity="1" />
@@ -182,7 +178,18 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
             <End Role="Klanten" EntitySet="Klanten" />
             <End Role="Boekingen" EntitySet="Boekingen" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="PROG6ASPNETModel.sysdiagrams" />
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -218,6 +225,7 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
           <EntitySetMapping Name="Boekingen">
             <EntityTypeMapping TypeName="PROG6ASPNETModel.Boekingen">
               <MappingFragment StoreEntitySet="Boekingen">
+                <ScalarProperty Name="BoekingsNr" ColumnName="BoekingsNr" />
                 <ScalarProperty Name="Startdatum" ColumnName="Startdatum" />
                 <ScalarProperty Name="Einddatum" ColumnName="Einddatum" />
                 <ScalarProperty Name="Prijs" ColumnName="Prijs" />
@@ -226,6 +234,17 @@ warning 6002: The table/view 'PROG6ASPNET.dbo.Boekingen' does not have a primary
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Boeking_KlantNr" ColumnName="Boeking_KlantNr" />
                 <ScalarProperty Name="Boeking_KamerNr" ColumnName="Boeking_KamerNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PROG6ASPNETModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

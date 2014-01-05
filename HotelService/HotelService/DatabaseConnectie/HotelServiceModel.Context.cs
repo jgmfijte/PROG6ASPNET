@@ -28,5 +28,6 @@ namespace HotelService.Database
         public virtual DbSet<Hotelkamers> Hotelkamers { get; set; }
         public virtual DbSet<Klanten> Klanten { get; set; }
         public virtual DbSet<Boekingen> Boekingen { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
