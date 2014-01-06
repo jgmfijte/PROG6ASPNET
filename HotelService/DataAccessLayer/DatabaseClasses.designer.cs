@@ -33,12 +33,18 @@ namespace DataAccessLayer
     partial void InsertBoekingen(Boekingen instance);
     partial void UpdateBoekingen(Boekingen instance);
     partial void DeleteBoekingen(Boekingen instance);
-    partial void InsertKlanten(Klanten instance);
-    partial void UpdateKlanten(Klanten instance);
-    partial void DeleteKlanten(Klanten instance);
     partial void InsertHotelkamer(Hotelkamer instance);
     partial void UpdateHotelkamer(Hotelkamer instance);
     partial void DeleteHotelkamer(Hotelkamer instance);
+    partial void InsertGebruiker(Gebruiker instance);
+    partial void UpdateGebruiker(Gebruiker instance);
+    partial void DeleteGebruiker(Gebruiker instance);
+    partial void InsertRollen(Rollen instance);
+    partial void UpdateRollen(Rollen instance);
+    partial void DeleteRollen(Rollen instance);
+    partial void InsertKlanten(Klanten instance);
+    partial void UpdateKlanten(Klanten instance);
+    partial void DeleteKlanten(Klanten instance);
     #endregion
 		
 		public DatabaseClassesDataContext() : 
@@ -79,19 +85,35 @@ namespace DataAccessLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<Klanten> Klantens
-		{
-			get
-			{
-				return this.GetTable<Klanten>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Hotelkamer> Hotelkamers
 		{
 			get
 			{
 				return this.GetTable<Hotelkamer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Gebruiker> Gebruikers
+		{
+			get
+			{
+				return this.GetTable<Gebruiker>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Rollen> Rollens
+		{
+			get
+			{
+				return this.GetTable<Rollen>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Klanten> Klantens
+		{
+			get
+			{
+				return this.GetTable<Klanten>();
 			}
 		}
 	}
@@ -120,9 +142,9 @@ namespace DataAccessLayer
 		
 		private int _BoekingsNr;
 		
-		private EntityRef<Klanten> _Klanten;
-		
 		private EntityRef<Hotelkamer> _Hotelkamer;
+		
+		private EntityRef<Klanten> _Klanten;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -150,8 +172,8 @@ namespace DataAccessLayer
 		
 		public Boekingen()
 		{
-			this._Klanten = default(EntityRef<Klanten>);
 			this._Hotelkamer = default(EntityRef<Hotelkamer>);
+			this._Klanten = default(EntityRef<Klanten>);
 			OnCreated();
 		}
 		
@@ -343,40 +365,6 @@ namespace DataAccessLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Klanten_Boekingen", Storage="_Klanten", ThisKey="Boeking_KlantNr", OtherKey="KlantNummer", IsForeignKey=true)]
-		public Klanten Klanten
-		{
-			get
-			{
-				return this._Klanten.Entity;
-			}
-			set
-			{
-				Klanten previousValue = this._Klanten.Entity;
-				if (((previousValue != value) 
-							|| (this._Klanten.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Klanten.Entity = null;
-						previousValue.Boekingens.Remove(this);
-					}
-					this._Klanten.Entity = value;
-					if ((value != null))
-					{
-						value.Boekingens.Add(this);
-						this._Boeking_KlantNr = value.KlantNummer;
-					}
-					else
-					{
-						this._Boeking_KlantNr = default(int);
-					}
-					this.SendPropertyChanged("Klanten");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotelkamer_Boekingen", Storage="_Hotelkamer", ThisKey="Boeking_KamerNr", OtherKey="KamerNummer", IsForeignKey=true)]
 		public Hotelkamer Hotelkamer
 		{
@@ -411,6 +399,40 @@ namespace DataAccessLayer
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Klanten_Boekingen", Storage="_Klanten", ThisKey="Boeking_KlantNr", OtherKey="KlantNummer", IsForeignKey=true)]
+		public Klanten Klanten
+		{
+			get
+			{
+				return this._Klanten.Entity;
+			}
+			set
+			{
+				Klanten previousValue = this._Klanten.Entity;
+				if (((previousValue != value) 
+							|| (this._Klanten.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Klanten.Entity = null;
+						previousValue.Boekingens.Remove(this);
+					}
+					this._Klanten.Entity = value;
+					if ((value != null))
+					{
+						value.Boekingens.Add(this);
+						this._Boeking_KlantNr = value.KlantNummer;
+					}
+					else
+					{
+						this._Boeking_KlantNr = default(int);
+					}
+					this.SendPropertyChanged("Klanten");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -429,6 +451,509 @@ namespace DataAccessLayer
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Hotelkamers")]
+	public partial class Hotelkamer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _KamerNummer;
+		
+		private int _AantalPersonen;
+		
+		private decimal _MinimumPrijs;
+		
+		private System.Nullable<decimal> _ActuelePrijs;
+		
+		private EntitySet<Boekingen> _Boekingens;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnKamerNummerChanging(int value);
+    partial void OnKamerNummerChanged();
+    partial void OnAantalPersonenChanging(int value);
+    partial void OnAantalPersonenChanged();
+    partial void OnMinimumPrijsChanging(decimal value);
+    partial void OnMinimumPrijsChanged();
+    partial void OnActuelePrijsChanging(System.Nullable<decimal> value);
+    partial void OnActuelePrijsChanged();
+    #endregion
+		
+		public Hotelkamer()
+		{
+			this._Boekingens = new EntitySet<Boekingen>(new Action<Boekingen>(this.attach_Boekingens), new Action<Boekingen>(this.detach_Boekingens));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KamerNummer", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int KamerNummer
+		{
+			get
+			{
+				return this._KamerNummer;
+			}
+			set
+			{
+				if ((this._KamerNummer != value))
+				{
+					this.OnKamerNummerChanging(value);
+					this.SendPropertyChanging();
+					this._KamerNummer = value;
+					this.SendPropertyChanged("KamerNummer");
+					this.OnKamerNummerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AantalPersonen", DbType="Int NOT NULL")]
+		public int AantalPersonen
+		{
+			get
+			{
+				return this._AantalPersonen;
+			}
+			set
+			{
+				if ((this._AantalPersonen != value))
+				{
+					this.OnAantalPersonenChanging(value);
+					this.SendPropertyChanging();
+					this._AantalPersonen = value;
+					this.SendPropertyChanged("AantalPersonen");
+					this.OnAantalPersonenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumPrijs", DbType="Decimal(18,0) NOT NULL")]
+		public decimal MinimumPrijs
+		{
+			get
+			{
+				return this._MinimumPrijs;
+			}
+			set
+			{
+				if ((this._MinimumPrijs != value))
+				{
+					this.OnMinimumPrijsChanging(value);
+					this.SendPropertyChanging();
+					this._MinimumPrijs = value;
+					this.SendPropertyChanged("MinimumPrijs");
+					this.OnMinimumPrijsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActuelePrijs", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> ActuelePrijs
+		{
+			get
+			{
+				return this._ActuelePrijs;
+			}
+			set
+			{
+				if ((this._ActuelePrijs != value))
+				{
+					this.OnActuelePrijsChanging(value);
+					this.SendPropertyChanging();
+					this._ActuelePrijs = value;
+					this.SendPropertyChanged("ActuelePrijs");
+					this.OnActuelePrijsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotelkamer_Boekingen", Storage="_Boekingens", ThisKey="KamerNummer", OtherKey="Boeking_KamerNr")]
+		public EntitySet<Boekingen> Boekingens
+		{
+			get
+			{
+				return this._Boekingens;
+			}
+			set
+			{
+				this._Boekingens.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Boekingens(Boekingen entity)
+		{
+			this.SendPropertyChanging();
+			entity.Hotelkamer = this;
+		}
+		
+		private void detach_Boekingens(Boekingen entity)
+		{
+			this.SendPropertyChanging();
+			entity.Hotelkamer = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gebruikers")]
+	public partial class Gebruiker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _userID;
+		
+		private string _rol;
+		
+		private string _Voornaam;
+		
+		private string _Achternaam;
+		
+		private string _tussenvoegsel;
+		
+		private string _wachtwoord;
+		
+		private EntitySet<Klanten> _Klantens;
+		
+		private EntityRef<Rollen> _Rollen;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnuserIDChanging(int value);
+    partial void OnuserIDChanged();
+    partial void OnrolChanging(string value);
+    partial void OnrolChanged();
+    partial void OnVoornaamChanging(string value);
+    partial void OnVoornaamChanged();
+    partial void OnAchternaamChanging(string value);
+    partial void OnAchternaamChanged();
+    partial void OntussenvoegselChanging(string value);
+    partial void OntussenvoegselChanged();
+    partial void OnwachtwoordChanging(string value);
+    partial void OnwachtwoordChanged();
+    #endregion
+		
+		public Gebruiker()
+		{
+			this._Klantens = new EntitySet<Klanten>(new Action<Klanten>(this.attach_Klantens), new Action<Klanten>(this.detach_Klantens));
+			this._Rollen = default(EntityRef<Rollen>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int userID
+		{
+			get
+			{
+				return this._userID;
+			}
+			set
+			{
+				if ((this._userID != value))
+				{
+					this.OnuserIDChanging(value);
+					this.SendPropertyChanging();
+					this._userID = value;
+					this.SendPropertyChanged("userID");
+					this.OnuserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol", DbType="NVarChar(12) NOT NULL", CanBeNull=false)]
+		public string rol
+		{
+			get
+			{
+				return this._rol;
+			}
+			set
+			{
+				if ((this._rol != value))
+				{
+					if (this._Rollen.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnrolChanging(value);
+					this.SendPropertyChanging();
+					this._rol = value;
+					this.SendPropertyChanged("rol");
+					this.OnrolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Voornaam", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Voornaam
+		{
+			get
+			{
+				return this._Voornaam;
+			}
+			set
+			{
+				if ((this._Voornaam != value))
+				{
+					this.OnVoornaamChanging(value);
+					this.SendPropertyChanging();
+					this._Voornaam = value;
+					this.SendPropertyChanged("Voornaam");
+					this.OnVoornaamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Achternaam", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Achternaam
+		{
+			get
+			{
+				return this._Achternaam;
+			}
+			set
+			{
+				if ((this._Achternaam != value))
+				{
+					this.OnAchternaamChanging(value);
+					this.SendPropertyChanging();
+					this._Achternaam = value;
+					this.SendPropertyChanged("Achternaam");
+					this.OnAchternaamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tussenvoegsel", DbType="NVarChar(10)")]
+		public string tussenvoegsel
+		{
+			get
+			{
+				return this._tussenvoegsel;
+			}
+			set
+			{
+				if ((this._tussenvoegsel != value))
+				{
+					this.OntussenvoegselChanging(value);
+					this.SendPropertyChanging();
+					this._tussenvoegsel = value;
+					this.SendPropertyChanged("tussenvoegsel");
+					this.OntussenvoegselChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wachtwoord", DbType="NVarChar(50)")]
+		public string wachtwoord
+		{
+			get
+			{
+				return this._wachtwoord;
+			}
+			set
+			{
+				if ((this._wachtwoord != value))
+				{
+					this.OnwachtwoordChanging(value);
+					this.SendPropertyChanging();
+					this._wachtwoord = value;
+					this.SendPropertyChanged("wachtwoord");
+					this.OnwachtwoordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gebruiker_Klanten", Storage="_Klantens", ThisKey="userID", OtherKey="userID")]
+		public EntitySet<Klanten> Klantens
+		{
+			get
+			{
+				return this._Klantens;
+			}
+			set
+			{
+				this._Klantens.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rollen_Gebruiker", Storage="_Rollen", ThisKey="rol", OtherKey="roleType", IsForeignKey=true)]
+		public Rollen Rollen
+		{
+			get
+			{
+				return this._Rollen.Entity;
+			}
+			set
+			{
+				Rollen previousValue = this._Rollen.Entity;
+				if (((previousValue != value) 
+							|| (this._Rollen.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Rollen.Entity = null;
+						previousValue.Gebruikers.Remove(this);
+					}
+					this._Rollen.Entity = value;
+					if ((value != null))
+					{
+						value.Gebruikers.Add(this);
+						this._rol = value.roleType;
+					}
+					else
+					{
+						this._rol = default(string);
+					}
+					this.SendPropertyChanged("Rollen");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Klantens(Klanten entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gebruiker = this;
+		}
+		
+		private void detach_Klantens(Klanten entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gebruiker = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rollen")]
+	public partial class Rollen : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _roleType;
+		
+		private EntitySet<Gebruiker> _Gebruikers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnroleTypeChanging(string value);
+    partial void OnroleTypeChanged();
+    #endregion
+		
+		public Rollen()
+		{
+			this._Gebruikers = new EntitySet<Gebruiker>(new Action<Gebruiker>(this.attach_Gebruikers), new Action<Gebruiker>(this.detach_Gebruikers));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roleType", DbType="NVarChar(12) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string roleType
+		{
+			get
+			{
+				return this._roleType;
+			}
+			set
+			{
+				if ((this._roleType != value))
+				{
+					this.OnroleTypeChanging(value);
+					this.SendPropertyChanging();
+					this._roleType = value;
+					this.SendPropertyChanged("roleType");
+					this.OnroleTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rollen_Gebruiker", Storage="_Gebruikers", ThisKey="roleType", OtherKey="rol")]
+		public EntitySet<Gebruiker> Gebruikers
+		{
+			get
+			{
+				return this._Gebruikers;
+			}
+			set
+			{
+				this._Gebruikers.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Gebruikers(Gebruiker entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rollen = this;
+		}
+		
+		private void detach_Gebruikers(Gebruiker entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rollen = null;
 		}
 	}
 	
@@ -458,7 +983,11 @@ namespace DataAccessLayer
 		
 		private string _Email;
 		
+		private System.Nullable<int> _userID;
+		
 		private EntitySet<Boekingen> _Boekingens;
+		
+		private EntityRef<Gebruiker> _Gebruiker;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -484,11 +1013,14 @@ namespace DataAccessLayer
     partial void OnWoonplaatsChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
+    partial void OnuserIDChanging(System.Nullable<int> value);
+    partial void OnuserIDChanged();
     #endregion
 		
 		public Klanten()
 		{
 			this._Boekingens = new EntitySet<Boekingen>(new Action<Boekingen>(this.attach_Boekingens), new Action<Boekingen>(this.detach_Boekingens));
+			this._Gebruiker = default(EntityRef<Gebruiker>);
 			OnCreated();
 		}
 		
@@ -692,6 +1224,30 @@ namespace DataAccessLayer
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userID", DbType="Int")]
+		public System.Nullable<int> userID
+		{
+			get
+			{
+				return this._userID;
+			}
+			set
+			{
+				if ((this._userID != value))
+				{
+					if (this._Gebruiker.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnuserIDChanging(value);
+					this.SendPropertyChanging();
+					this._userID = value;
+					this.SendPropertyChanged("userID");
+					this.OnuserIDChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Klanten_Boekingen", Storage="_Boekingens", ThisKey="KlantNummer", OtherKey="Boeking_KlantNr")]
 		public EntitySet<Boekingen> Boekingens
 		{
@@ -702,6 +1258,40 @@ namespace DataAccessLayer
 			set
 			{
 				this._Boekingens.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gebruiker_Klanten", Storage="_Gebruiker", ThisKey="userID", OtherKey="userID", IsForeignKey=true)]
+		public Gebruiker Gebruiker
+		{
+			get
+			{
+				return this._Gebruiker.Entity;
+			}
+			set
+			{
+				Gebruiker previousValue = this._Gebruiker.Entity;
+				if (((previousValue != value) 
+							|| (this._Gebruiker.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gebruiker.Entity = null;
+						previousValue.Klantens.Remove(this);
+					}
+					this._Gebruiker.Entity = value;
+					if ((value != null))
+					{
+						value.Klantens.Add(this);
+						this._userID = value.userID;
+					}
+					else
+					{
+						this._userID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Gebruiker");
+				}
 			}
 		}
 		
@@ -735,168 +1325,6 @@ namespace DataAccessLayer
 		{
 			this.SendPropertyChanging();
 			entity.Klanten = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Hotelkamers")]
-	public partial class Hotelkamer : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _KamerNummer;
-		
-		private int _AantalPersonen;
-		
-		private decimal _MinimumPrijs;
-		
-		private System.Nullable<decimal> _ActuelePrijs;
-		
-		private EntitySet<Boekingen> _Boekingens;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnKamerNummerChanging(int value);
-    partial void OnKamerNummerChanged();
-    partial void OnAantalPersonenChanging(int value);
-    partial void OnAantalPersonenChanged();
-    partial void OnMinimumPrijsChanging(decimal value);
-    partial void OnMinimumPrijsChanged();
-    partial void OnActuelePrijsChanging(System.Nullable<decimal> value);
-    partial void OnActuelePrijsChanged();
-    #endregion
-		
-		public Hotelkamer()
-		{
-			this._Boekingens = new EntitySet<Boekingen>(new Action<Boekingen>(this.attach_Boekingens), new Action<Boekingen>(this.detach_Boekingens));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KamerNummer", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int KamerNummer
-		{
-			get
-			{
-				return this._KamerNummer;
-			}
-			set
-			{
-				if ((this._KamerNummer != value))
-				{
-					this.OnKamerNummerChanging(value);
-					this.SendPropertyChanging();
-					this._KamerNummer = value;
-					this.SendPropertyChanged("KamerNummer");
-					this.OnKamerNummerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AantalPersonen", DbType="Int NOT NULL")]
-		public int AantalPersonen
-		{
-			get
-			{
-				return this._AantalPersonen;
-			}
-			set
-			{
-				if ((this._AantalPersonen != value))
-				{
-					this.OnAantalPersonenChanging(value);
-					this.SendPropertyChanging();
-					this._AantalPersonen = value;
-					this.SendPropertyChanged("AantalPersonen");
-					this.OnAantalPersonenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumPrijs", DbType="Decimal(18,0) NOT NULL")]
-		public decimal MinimumPrijs
-		{
-			get
-			{
-				return this._MinimumPrijs;
-			}
-			set
-			{
-				if ((this._MinimumPrijs != value))
-				{
-					this.OnMinimumPrijsChanging(value);
-					this.SendPropertyChanging();
-					this._MinimumPrijs = value;
-					this.SendPropertyChanged("MinimumPrijs");
-					this.OnMinimumPrijsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActuelePrijs", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> ActuelePrijs
-		{
-			get
-			{
-				return this._ActuelePrijs;
-			}
-			set
-			{
-				if ((this._ActuelePrijs != value))
-				{
-					this.OnActuelePrijsChanging(value);
-					this.SendPropertyChanging();
-					this._ActuelePrijs = value;
-					this.SendPropertyChanged("ActuelePrijs");
-					this.OnActuelePrijsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotelkamer_Boekingen", Storage="_Boekingens", ThisKey="KamerNummer", OtherKey="Boeking_KamerNr")]
-		public EntitySet<Boekingen> Boekingens
-		{
-			get
-			{
-				return this._Boekingens;
-			}
-			set
-			{
-				this._Boekingens.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Boekingens(Boekingen entity)
-		{
-			this.SendPropertyChanging();
-			entity.Hotelkamer = this;
-		}
-		
-		private void detach_Boekingens(Boekingen entity)
-		{
-			this.SendPropertyChanging();
-			entity.Hotelkamer = null;
 		}
 	}
 }

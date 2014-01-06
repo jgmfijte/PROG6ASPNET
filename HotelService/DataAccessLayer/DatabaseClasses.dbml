@@ -11,8 +11,35 @@
       <Column Name="Boeking_KlantNr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Boeking_KamerNr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="BoekingsNr" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Klanten_Boekingen" Member="Klanten" ThisKey="Boeking_KlantNr" OtherKey="KlantNummer" Type="Klanten" IsForeignKey="true" />
       <Association Name="Hotelkamer_Boekingen" Member="Hotelkamer" ThisKey="Boeking_KamerNr" OtherKey="KamerNummer" Type="Hotelkamer" IsForeignKey="true" />
+      <Association Name="Klanten_Boekingen" Member="Klanten" ThisKey="Boeking_KlantNr" OtherKey="KlantNummer" Type="Klanten" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Hotelkamers" Member="Hotelkamers">
+    <Type Name="Hotelkamer">
+      <Column Name="KamerNummer" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AantalPersonen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MinimumPrijs" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ActuelePrijs" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Hotelkamer_Boekingen" Member="Boekingens" ThisKey="KamerNummer" OtherKey="Boeking_KamerNr" Type="Boekingen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gebruikers" Member="Gebruikers">
+    <Type Name="Gebruiker">
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rol" Type="System.String" DbType="NVarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="Voornaam" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Achternaam" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="tussenvoegsel" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="wachtwoord" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Gebruiker_Klanten" Member="Klantens" ThisKey="userID" OtherKey="userID" Type="Klanten" />
+      <Association Name="Rollen_Gebruiker" Member="Rollen" ThisKey="rol" OtherKey="roleType" Type="Rollen" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rollen" Member="Rollens">
+    <Type Name="Rollen">
+      <Column Name="roleType" Type="System.String" DbType="NVarChar(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Rollen_Gebruiker" Member="Gebruikers" ThisKey="roleType" OtherKey="rol" Type="Gebruiker" />
     </Type>
   </Table>
   <Table Name="dbo.Klanten" Member="Klantens">
@@ -27,16 +54,9 @@
       <Column Name="Postcode" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="Woonplaats" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="userID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Klanten_Boekingen" Member="Boekingens" ThisKey="KlantNummer" OtherKey="Boeking_KlantNr" Type="Boekingen" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Hotelkamers" Member="Hotelkamers">
-    <Type Name="Hotelkamer">
-      <Column Name="KamerNummer" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="AantalPersonen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MinimumPrijs" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
-      <Column Name="ActuelePrijs" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Hotelkamer_Boekingen" Member="Boekingens" ThisKey="KamerNummer" OtherKey="Boeking_KamerNr" Type="Boekingen" />
+      <Association Name="Gebruiker_Klanten" Member="Gebruiker" ThisKey="userID" OtherKey="userID" Type="Gebruiker" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
