@@ -1,0 +1,70 @@
+﻿@model IQueryable<DataAccessLayer.Boekingen>
+@{
+    ViewBag.Title = "KlantBoekingOverzicht";
+}
+
+<link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+<div id="wrapper">
+    <div id="headerwrap">
+        <div id="header">
+            <h1>HotelService </h1>
+        </div>
+    </div>
+    <div id="menuwrap">
+        <div id="menu">
+            <p>
+                @Html.ActionLink("Home", "KlantIndex", "Home") | 
+                @Html.ActionLink("Bekijk onze kamers", "KamerOverzicht", "Kamer") | 
+                @Html.ActionLink("Bekijk uw vorige boekingen", "KlantBoekingOverzicht", "Boeking") | 
+                @Html.ActionLink("Log uit", "Logoff", "Home")
+            </p>
+        </div>
+    </div>
+    <div id="contentwrap">
+        <div id="content">
+            <h2>@ViewBag.Title</h2>
+            
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Kamernummer</th>
+                    <th>Startdatum</th>
+                    <th>Einddatum</th>
+                    <th>KlantID</th>
+                </tr>
+
+                @foreach (var boeking in Model)
+                { 
+                    <tr>
+                        <td>@boeking.BoekingsNr</td>
+                        <td>@boeking.Boeking_KamerNr</td>
+                        <td>@boeking.Startdatum</td>
+                        <td>@boeking.Einddatum</td>
+                        <td>@boeking.Boeking_KlantNr</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+    <div id="footerwrap">
+        <div id="footer">
+            <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function OpenDeleteWarning() {
+        var userWidth = screen.availWidth;
+        var userHeight = screen.availHeight;
+        leftPos = (userWidth - 300) / 2,
+        topPos = (userHeight - 180) / 2;
+        settings = 'modal,scrollBars=no,resizable=no,toolbar=no,menubar=no,location=no,directories=no,left=' + leftPos + ',top=' + topPos + ',width=300, height=180';
+
+        window.open("Delete", "popup", settings);
+    }
+    </script>

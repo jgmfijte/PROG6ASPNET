@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using HotelService.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,15 @@ namespace HotelService.Controllers
         {
             return View();
         }
-
+        [KlantFilter]
+        public ActionResult KlantKamerOverzicht()
+        {
+            var result =
+                from k in context.Hotelkamers
+                select k;
+            return View(result);
+        }
+        [MedewerkersFilter]
         public ActionResult KamerOverzicht()
         {
             var result =
@@ -29,16 +38,19 @@ namespace HotelService.Controllers
         
         }
 
+        [MedewerkersFilter]
         public ActionResult Create()
         {
             return View();
         }
 
+        [MedewerkersFilter]
         public ActionResult Delete()
         {
             return View();
         }
 
+        [MedewerkersFilter]
         public ActionResult Edit()
         {
             return View();

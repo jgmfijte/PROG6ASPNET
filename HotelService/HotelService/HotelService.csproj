@@ -192,6 +192,8 @@
     <Content Include="Views\Home\MedewerkersIndex.cshtml" />
     <Content Include="Views\Home\KlantNotAllowed.cshtml" />
     <Content Include="Views\Home\MedewerkerNotAllowed.cshtml" />
+    <Content Include="Views\Boeking\KlantBoekingOverzicht.cshtml" />
+    <Content Include="Views\Kamer\KlantKamerOverzicht.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

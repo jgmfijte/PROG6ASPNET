@@ -34,6 +34,7 @@ namespace HotelService.Controllers
                 login.Values.Add("tussenvoegsel", found.tussenvoegsel);
                 login.Values.Add("achternaam", found.Achternaam);
                 login.Values.Add("rol", found.rol);
+                login.Values.Add("userID", found.userID.ToString());
                 login.Expires = DateTime.Now.AddHours(4);
                 Response.Cookies.Add(login);
 
@@ -63,7 +64,21 @@ namespace HotelService.Controllers
         [LoggedInFilter]
         public ActionResult KlantIndex()
         {
-            return View();
+            HttpCookie userCookie = HttpContext.Request.Cookies["LoginCookie"];
+            string userID = userCookie.Values["userID"];
+            int user = Convert.ToInt32(userID);
+            IQueryable<DataAccessLayer.Gebruiker> userResult = from u in context.Gebruikers
+                                                               where u.userID == user
+                                                               select u;
+            if (userResult != null)
+            {
+                DataAccessLayer.Gebruiker foundUser = userResult.FirstOrDefault();
+                return View(foundUser);
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
         [LoggedInFilter]
