@@ -39,12 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -122,33 +116,6 @@
     <Compile Include="Controllers\GastController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KamerController.cs" />
-    <Compile Include="Database\Boekingen.cs">
-      <DependentUpon>HotelServiceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Hotelkamers.cs">
-      <DependentUpon>HotelServiceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\HotelServiceModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HotelServiceModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\HotelServiceModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HotelServiceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\HotelServiceModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HotelServiceModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Klanten.cs">
-      <DependentUpon>HotelServiceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\sysdiagrams.cs">
-      <DependentUpon>HotelServiceModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,7 +141,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -218,30 +184,6 @@
     <Content Include="Views\Kamer\Edit.cshtml" />
     <Content Include="Views\Kamer\Delete.cshtml" />
     <Content Include="Views\Gast\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Database\HotelServiceModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HotelServiceModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Database\HotelServiceModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HotelServiceModel.edmx</DependentUpon>
-      <LastGenOutput>HotelServiceModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Database\HotelServiceModel.edmx.diagram">
-      <DependentUpon>HotelServiceModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Database\HotelServiceModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HotelServiceModel.edmx</DependentUpon>
-      <LastGenOutput>HotelServiceModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
