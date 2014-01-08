@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HotelService.Models.Kamer
+@{
     ViewBag.Title = "Nieuwe Kamer";
 }
 
@@ -20,7 +21,30 @@
     <div id="contentwrap">
         <div id="content">    
             <h2>@ViewBag.Title</h2>
-            <p>Hier dus de inhoud van deze pagina invullen</p>
+            <p>Hier kun je een kamer aanmaken.</p>
+            @using (Html.BeginForm())
+            { 
+                <fieldset>
+	                <legend>Nieuwe kamer</legend>
+                    
+	                <p>
+                        Aantal Personen
+                        @Html.EditorFor(model => model.AantalPersonen)
+	                </p>
+
+                    <p>
+                        Kamernummer
+                        @Html.EditorFor(model => model.KamerNummer)
+                    </p>
+
+                    <p>
+                        Prijs per nacht
+                        @Html.EditorFor(model => model.PrijsPerNacht)
+                    </p>
+
+                    <p><input type="submit" value="Nieuwe kamer aanmaken" /></p>
+                </fieldset>
+            }
         </div>
     </div>
     <div id="footerwrap">
