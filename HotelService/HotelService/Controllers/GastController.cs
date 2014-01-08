@@ -32,6 +32,19 @@ namespace HotelService.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Gast gast)
+        {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine(gast.Voornaam);
+                return RedirectToAction("Index");
+            }
+
+            return View(gast);
+        }
+
         public ActionResult Details()
         {
             return View();

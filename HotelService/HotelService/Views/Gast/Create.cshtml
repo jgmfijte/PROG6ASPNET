@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Nieuwe Boeking";
+    ViewBag.Title = "Nieuwe Gast";
 }
 
 <link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
@@ -20,8 +20,59 @@
     <div id="contentwrap">
         <div id="content">    
             <h2>@ViewBag.Title</h2>
-            <p>Hier dus de inhoud van deze pagina invullen</p>
-        </div>
+            <p>Vul hieronder de informatie van de nieuwe gast in.</p>
+            <table>
+                <tr>
+                    <td>Voornaam</td>
+                    <td>@Html.TextBox("voornaam") </td>
+                </tr>
+                <tr>
+                    <td>Achternaam</td>
+                    <td>@Html.TextBox("achternaam")</td>
+                </tr>
+                <tr>
+                    <td>Geboortedatum (DD-MM-JJ)</td>
+                    <td>@Html.TextBox("Geboortedatum")</td>
+                </tr>
+                <tr>
+                    <td>Man/Vrouw</td>
+                    <td>@{List<SelectListItem> items = new List<SelectListItem>();
+                        items.Add(new SelectListItem
+                        {
+                            Text = "Man",
+                            Value = "1",
+                            Selected = true
+                        });
+                        items.Add(new SelectListItem
+                        {
+                            Text = "Vrouw",
+                            Value = "2",
+                            Selected = false
+                        });
+                        }
+                        @Html.DropDownList("manVrouwDropdown", items)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adres</td>
+                    <td>@Html.TextBox("adres")</td>
+                </tr>
+                <tr>
+                    <td>Postcode</td>
+                    <td>@Html.TextBox("postcode")</td>
+                </tr>
+                <tr>
+                    <td>Woonplaats</td>
+                    <td>@Html.TextBox("woonplaats")</td>
+                </tr>
+                <tr>
+                    <td>E-mailadres</td>
+                    <td>@Html.TextBox("emailadres")</td>
+                </tr>
+            </table>
+
+            <input type="button" title="Create" value="C" onclick="location.href='@Url.Action("Create")'" />
+</div>
     </div>
     <div id="footerwrap">
         <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
