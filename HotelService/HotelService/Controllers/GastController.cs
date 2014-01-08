@@ -38,10 +38,17 @@ namespace HotelService.Controllers
 
         [MedewerkersFilter]
         [HttpPost]
-        public ActionResult Create(Gast gastje)
+        public ActionResult Created(DataAccessLayer.Klanten gast)
         {
+            if (ModelState.IsValid)
+            {
+                
+                context.Klantens.InsertOnSubmit(gast);
+                context.SubmitChanges();
+                return View();
+            }
             //invoeren in db
-            return View();
+            return View("Create", gast);
         }
 
         [MedewerkersFilter]

@@ -20,6 +20,7 @@ namespace DataAccessLayer
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
+    using System.ComponentModel.DataAnnotations;
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="PROG6ASPNET")]
@@ -33,18 +34,18 @@ namespace DataAccessLayer
     partial void InsertBoekingen(Boekingen instance);
     partial void UpdateBoekingen(Boekingen instance);
     partial void DeleteBoekingen(Boekingen instance);
-    partial void InsertHotelkamer(Hotelkamer instance);
-    partial void UpdateHotelkamer(Hotelkamer instance);
-    partial void DeleteHotelkamer(Hotelkamer instance);
-    partial void InsertGebruiker(Gebruiker instance);
-    partial void UpdateGebruiker(Gebruiker instance);
-    partial void DeleteGebruiker(Gebruiker instance);
-    partial void InsertRollen(Rollen instance);
-    partial void UpdateRollen(Rollen instance);
-    partial void DeleteRollen(Rollen instance);
     partial void InsertKlanten(Klanten instance);
     partial void UpdateKlanten(Klanten instance);
     partial void DeleteKlanten(Klanten instance);
+    partial void InsertGebruiker(Gebruiker instance);
+    partial void UpdateGebruiker(Gebruiker instance);
+    partial void DeleteGebruiker(Gebruiker instance);
+    partial void InsertHotelkamer(Hotelkamer instance);
+    partial void UpdateHotelkamer(Hotelkamer instance);
+    partial void DeleteHotelkamer(Hotelkamer instance);
+    partial void InsertRollen(Rollen instance);
+    partial void UpdateRollen(Rollen instance);
+    partial void DeleteRollen(Rollen instance);
     #endregion
 		
 		public DatabaseClassesDataContext() : 
@@ -85,11 +86,11 @@ namespace DataAccessLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<Hotelkamer> Hotelkamers
+		public System.Data.Linq.Table<Klanten> Klantens
 		{
 			get
 			{
-				return this.GetTable<Hotelkamer>();
+				return this.GetTable<Klanten>();
 			}
 		}
 		
@@ -101,19 +102,19 @@ namespace DataAccessLayer
 			}
 		}
 		
+		public System.Data.Linq.Table<Hotelkamer> Hotelkamers
+		{
+			get
+			{
+				return this.GetTable<Hotelkamer>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Rollen> Rollens
 		{
 			get
 			{
 				return this.GetTable<Rollen>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Klanten> Klantens
-		{
-			get
-			{
-				return this.GetTable<Klanten>();
 			}
 		}
 	}
@@ -142,9 +143,9 @@ namespace DataAccessLayer
 		
 		private int _BoekingsNr;
 		
-		private EntityRef<Hotelkamer> _Hotelkamer;
-		
 		private EntityRef<Klanten> _Klanten;
+		
+		private EntityRef<Hotelkamer> _Hotelkamer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -172,8 +173,8 @@ namespace DataAccessLayer
 		
 		public Boekingen()
 		{
-			this._Hotelkamer = default(EntityRef<Hotelkamer>);
 			this._Klanten = default(EntityRef<Klanten>);
+			this._Hotelkamer = default(EntityRef<Hotelkamer>);
 			OnCreated();
 		}
 		
@@ -365,40 +366,6 @@ namespace DataAccessLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotelkamer_Boekingen", Storage="_Hotelkamer", ThisKey="Boeking_KamerNr", OtherKey="KamerNummer", IsForeignKey=true)]
-		public Hotelkamer Hotelkamer
-		{
-			get
-			{
-				return this._Hotelkamer.Entity;
-			}
-			set
-			{
-				Hotelkamer previousValue = this._Hotelkamer.Entity;
-				if (((previousValue != value) 
-							|| (this._Hotelkamer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Hotelkamer.Entity = null;
-						previousValue.Boekingens.Remove(this);
-					}
-					this._Hotelkamer.Entity = value;
-					if ((value != null))
-					{
-						value.Boekingens.Add(this);
-						this._Boeking_KamerNr = value.KamerNummer;
-					}
-					else
-					{
-						this._Boeking_KamerNr = default(int);
-					}
-					this.SendPropertyChanged("Hotelkamer");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Klanten_Boekingen", Storage="_Klanten", ThisKey="Boeking_KlantNr", OtherKey="KlantNummer", IsForeignKey=true)]
 		public Klanten Klanten
 		{
@@ -433,6 +400,40 @@ namespace DataAccessLayer
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotelkamer_Boekingen", Storage="_Hotelkamer", ThisKey="Boeking_KamerNr", OtherKey="KamerNummer", IsForeignKey=true)]
+		public Hotelkamer Hotelkamer
+		{
+			get
+			{
+				return this._Hotelkamer.Entity;
+			}
+			set
+			{
+				Hotelkamer previousValue = this._Hotelkamer.Entity;
+				if (((previousValue != value) 
+							|| (this._Hotelkamer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Hotelkamer.Entity = null;
+						previousValue.Boekingens.Remove(this);
+					}
+					this._Hotelkamer.Entity = value;
+					if ((value != null))
+					{
+						value.Boekingens.Add(this);
+						this._Boeking_KamerNr = value.KamerNummer;
+					}
+					else
+					{
+						this._Boeking_KamerNr = default(int);
+					}
+					this.SendPropertyChanged("Hotelkamer");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -454,123 +455,306 @@ namespace DataAccessLayer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Hotelkamers")]
-	public partial class Hotelkamer : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Klanten")]
+	public partial class Klanten : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _KamerNummer;
+		private int _KlantNummer;
 		
-		private int _AantalPersonen;
+		private string _Voornaam;
 		
-		private decimal _MinimumPrijs;
+		private string _Achternaam;
 		
-		private System.Nullable<decimal> _ActuelePrijs;
+		private string _tussenvoegsel;
+		
+		private System.DateTime _Geboortedatum;
+		
+		private string _Geslacht;
+		
+		private string _Adres;
+		
+		private string _Postcode;
+		
+		private string _Woonplaats;
+		
+		private string _Email;
+		
+		private System.Nullable<int> _userID;
 		
 		private EntitySet<Boekingen> _Boekingens;
+		
+		private EntityRef<Gebruiker> _Gebruiker;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnKamerNummerChanging(int value);
-    partial void OnKamerNummerChanged();
-    partial void OnAantalPersonenChanging(int value);
-    partial void OnAantalPersonenChanged();
-    partial void OnMinimumPrijsChanging(decimal value);
-    partial void OnMinimumPrijsChanged();
-    partial void OnActuelePrijsChanging(System.Nullable<decimal> value);
-    partial void OnActuelePrijsChanged();
+    partial void OnKlantNummerChanging(int value);
+    partial void OnKlantNummerChanged();
+    partial void OnVoornaamChanging(string value);
+    partial void OnVoornaamChanged();
+    partial void OnAchternaamChanging(string value);
+    partial void OnAchternaamChanged();
+    partial void OntussenvoegselChanging(string value);
+    partial void OntussenvoegselChanged();
+    partial void OnGeboortedatumChanging(System.DateTime value);
+    partial void OnGeboortedatumChanged();
+    partial void OnGeslachtChanging(string value);
+    partial void OnGeslachtChanged();
+    partial void OnAdresChanging(string value);
+    partial void OnAdresChanged();
+    partial void OnPostcodeChanging(string value);
+    partial void OnPostcodeChanged();
+    partial void OnWoonplaatsChanging(string value);
+    partial void OnWoonplaatsChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnuserIDChanging(System.Nullable<int> value);
+    partial void OnuserIDChanged();
     #endregion
 		
-		public Hotelkamer()
+		public Klanten()
 		{
 			this._Boekingens = new EntitySet<Boekingen>(new Action<Boekingen>(this.attach_Boekingens), new Action<Boekingen>(this.detach_Boekingens));
+			this._Gebruiker = default(EntityRef<Gebruiker>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KamerNummer", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int KamerNummer
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KlantNummer", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int KlantNummer
 		{
 			get
 			{
-				return this._KamerNummer;
+				return this._KlantNummer;
 			}
 			set
 			{
-				if ((this._KamerNummer != value))
+				if ((this._KlantNummer != value))
 				{
-					this.OnKamerNummerChanging(value);
+					this.OnKlantNummerChanging(value);
 					this.SendPropertyChanging();
-					this._KamerNummer = value;
-					this.SendPropertyChanged("KamerNummer");
-					this.OnKamerNummerChanged();
+					this._KlantNummer = value;
+					this.SendPropertyChanged("KlantNummer");
+					this.OnKlantNummerChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AantalPersonen", DbType="Int NOT NULL")]
-		public int AantalPersonen
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Voornaam", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Voornaam
 		{
 			get
 			{
-				return this._AantalPersonen;
+				return this._Voornaam;
 			}
 			set
 			{
-				if ((this._AantalPersonen != value))
+				if ((this._Voornaam != value))
 				{
-					this.OnAantalPersonenChanging(value);
+					this.OnVoornaamChanging(value);
 					this.SendPropertyChanging();
-					this._AantalPersonen = value;
-					this.SendPropertyChanged("AantalPersonen");
-					this.OnAantalPersonenChanged();
+					this._Voornaam = value;
+					this.SendPropertyChanged("Voornaam");
+					this.OnVoornaamChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumPrijs", DbType="Decimal(18,0) NOT NULL")]
-		public decimal MinimumPrijs
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Achternaam", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Achternaam
 		{
 			get
 			{
-				return this._MinimumPrijs;
+				return this._Achternaam;
 			}
 			set
 			{
-				if ((this._MinimumPrijs != value))
+				if ((this._Achternaam != value))
 				{
-					this.OnMinimumPrijsChanging(value);
+					this.OnAchternaamChanging(value);
 					this.SendPropertyChanging();
-					this._MinimumPrijs = value;
-					this.SendPropertyChanged("MinimumPrijs");
-					this.OnMinimumPrijsChanged();
+					this._Achternaam = value;
+					this.SendPropertyChanged("Achternaam");
+					this.OnAchternaamChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActuelePrijs", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> ActuelePrijs
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tussenvoegsel", DbType="NVarChar(10)")]
+		public string tussenvoegsel
 		{
 			get
 			{
-				return this._ActuelePrijs;
+				return this._tussenvoegsel;
 			}
 			set
 			{
-				if ((this._ActuelePrijs != value))
+				if ((this._tussenvoegsel != value))
 				{
-					this.OnActuelePrijsChanging(value);
+					this.OntussenvoegselChanging(value);
 					this.SendPropertyChanging();
-					this._ActuelePrijs = value;
-					this.SendPropertyChanged("ActuelePrijs");
-					this.OnActuelePrijsChanged();
+					this._tussenvoegsel = value;
+					this.SendPropertyChanged("tussenvoegsel");
+					this.OntussenvoegselChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotelkamer_Boekingen", Storage="_Boekingens", ThisKey="KamerNummer", OtherKey="Boeking_KamerNr")]
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Geboortedatum", DbType="Date NOT NULL")]
+		public System.DateTime Geboortedatum
+		{
+			get
+			{
+				return this._Geboortedatum;
+			}
+			set
+			{
+				if ((this._Geboortedatum != value))
+				{
+					this.OnGeboortedatumChanging(value);
+					this.SendPropertyChanging();
+					this._Geboortedatum = value;
+					this.SendPropertyChanged("Geboortedatum");
+					this.OnGeboortedatumChanged();
+				}
+			}
+		}
+		
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Geslacht", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Geslacht
+		{
+			get
+			{
+				return this._Geslacht;
+			}
+			set
+			{
+				if ((this._Geslacht != value))
+				{
+					this.OnGeslachtChanging(value);
+					this.SendPropertyChanging();
+					this._Geslacht = value;
+					this.SendPropertyChanged("Geslacht");
+					this.OnGeslachtChanged();
+				}
+			}
+		}
+		
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adres", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Adres
+		{
+			get
+			{
+				return this._Adres;
+			}
+			set
+			{
+				if ((this._Adres != value))
+				{
+					this.OnAdresChanging(value);
+					this.SendPropertyChanging();
+					this._Adres = value;
+					this.SendPropertyChanged("Adres");
+					this.OnAdresChanged();
+				}
+			}
+		}
+		
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string Postcode
+		{
+			get
+			{
+				return this._Postcode;
+			}
+			set
+			{
+				if ((this._Postcode != value))
+				{
+					this.OnPostcodeChanging(value);
+					this.SendPropertyChanging();
+					this._Postcode = value;
+					this.SendPropertyChanged("Postcode");
+					this.OnPostcodeChanged();
+				}
+			}
+		}
+		
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Woonplaats", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Woonplaats
+		{
+			get
+			{
+				return this._Woonplaats;
+			}
+			set
+			{
+				if ((this._Woonplaats != value))
+				{
+					this.OnWoonplaatsChanging(value);
+					this.SendPropertyChanging();
+					this._Woonplaats = value;
+					this.SendPropertyChanged("Woonplaats");
+					this.OnWoonplaatsChanged();
+				}
+			}
+		}
+		
+        [Required]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userID", DbType="Int")]
+		public System.Nullable<int> userID
+		{
+			get
+			{
+				return this._userID;
+			}
+			set
+			{
+				if ((this._userID != value))
+				{
+					if (this._Gebruiker.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnuserIDChanging(value);
+					this.SendPropertyChanging();
+					this._userID = value;
+					this.SendPropertyChanged("userID");
+					this.OnuserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Klanten_Boekingen", Storage="_Boekingens", ThisKey="KlantNummer", OtherKey="Boeking_KlantNr")]
 		public EntitySet<Boekingen> Boekingens
 		{
 			get
@@ -580,6 +764,40 @@ namespace DataAccessLayer
 			set
 			{
 				this._Boekingens.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gebruiker_Klanten", Storage="_Gebruiker", ThisKey="userID", OtherKey="userID", IsForeignKey=true)]
+		public Gebruiker Gebruiker
+		{
+			get
+			{
+				return this._Gebruiker.Entity;
+			}
+			set
+			{
+				Gebruiker previousValue = this._Gebruiker.Entity;
+				if (((previousValue != value) 
+							|| (this._Gebruiker.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gebruiker.Entity = null;
+						previousValue.Klantens.Remove(this);
+					}
+					this._Gebruiker.Entity = value;
+					if ((value != null))
+					{
+						value.Klantens.Add(this);
+						this._userID = value.userID;
+					}
+					else
+					{
+						this._userID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Gebruiker");
+				}
 			}
 		}
 		
@@ -606,13 +824,13 @@ namespace DataAccessLayer
 		private void attach_Boekingens(Boekingen entity)
 		{
 			this.SendPropertyChanging();
-			entity.Hotelkamer = this;
+			entity.Klanten = this;
 		}
 		
 		private void detach_Boekingens(Boekingen entity)
 		{
 			this.SendPropertyChanging();
-			entity.Hotelkamer = null;
+			entity.Klanten = null;
 		}
 	}
 	
@@ -867,6 +1085,168 @@ namespace DataAccessLayer
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Hotelkamers")]
+	public partial class Hotelkamer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _KamerNummer;
+		
+		private int _AantalPersonen;
+		
+		private decimal _MinimumPrijs;
+		
+		private System.Nullable<decimal> _ActuelePrijs;
+		
+		private EntitySet<Boekingen> _Boekingens;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnKamerNummerChanging(int value);
+    partial void OnKamerNummerChanged();
+    partial void OnAantalPersonenChanging(int value);
+    partial void OnAantalPersonenChanged();
+    partial void OnMinimumPrijsChanging(decimal value);
+    partial void OnMinimumPrijsChanged();
+    partial void OnActuelePrijsChanging(System.Nullable<decimal> value);
+    partial void OnActuelePrijsChanged();
+    #endregion
+		
+		public Hotelkamer()
+		{
+			this._Boekingens = new EntitySet<Boekingen>(new Action<Boekingen>(this.attach_Boekingens), new Action<Boekingen>(this.detach_Boekingens));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KamerNummer", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int KamerNummer
+		{
+			get
+			{
+				return this._KamerNummer;
+			}
+			set
+			{
+				if ((this._KamerNummer != value))
+				{
+					this.OnKamerNummerChanging(value);
+					this.SendPropertyChanging();
+					this._KamerNummer = value;
+					this.SendPropertyChanged("KamerNummer");
+					this.OnKamerNummerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AantalPersonen", DbType="Int NOT NULL")]
+		public int AantalPersonen
+		{
+			get
+			{
+				return this._AantalPersonen;
+			}
+			set
+			{
+				if ((this._AantalPersonen != value))
+				{
+					this.OnAantalPersonenChanging(value);
+					this.SendPropertyChanging();
+					this._AantalPersonen = value;
+					this.SendPropertyChanged("AantalPersonen");
+					this.OnAantalPersonenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumPrijs", DbType="Decimal(18,0) NOT NULL")]
+		public decimal MinimumPrijs
+		{
+			get
+			{
+				return this._MinimumPrijs;
+			}
+			set
+			{
+				if ((this._MinimumPrijs != value))
+				{
+					this.OnMinimumPrijsChanging(value);
+					this.SendPropertyChanging();
+					this._MinimumPrijs = value;
+					this.SendPropertyChanged("MinimumPrijs");
+					this.OnMinimumPrijsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActuelePrijs", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> ActuelePrijs
+		{
+			get
+			{
+				return this._ActuelePrijs;
+			}
+			set
+			{
+				if ((this._ActuelePrijs != value))
+				{
+					this.OnActuelePrijsChanging(value);
+					this.SendPropertyChanging();
+					this._ActuelePrijs = value;
+					this.SendPropertyChanged("ActuelePrijs");
+					this.OnActuelePrijsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotelkamer_Boekingen", Storage="_Boekingens", ThisKey="KamerNummer", OtherKey="Boeking_KamerNr")]
+		public EntitySet<Boekingen> Boekingens
+		{
+			get
+			{
+				return this._Boekingens;
+			}
+			set
+			{
+				this._Boekingens.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Boekingens(Boekingen entity)
+		{
+			this.SendPropertyChanging();
+			entity.Hotelkamer = this;
+		}
+		
+		private void detach_Boekingens(Boekingen entity)
+		{
+			this.SendPropertyChanging();
+			entity.Hotelkamer = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rollen")]
 	public partial class Rollen : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -954,377 +1334,6 @@ namespace DataAccessLayer
 		{
 			this.SendPropertyChanging();
 			entity.Rollen = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Klanten")]
-	public partial class Klanten : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _KlantNummer;
-		
-		private string _Voornaam;
-		
-		private string _Achternaam;
-		
-		private string _tussenvoegsel;
-		
-		private System.DateTime _Geboortedatum;
-		
-		private string _Geslacht;
-		
-		private string _Adres;
-		
-		private string _Postcode;
-		
-		private string _Woonplaats;
-		
-		private string _Email;
-		
-		private System.Nullable<int> _userID;
-		
-		private EntitySet<Boekingen> _Boekingens;
-		
-		private EntityRef<Gebruiker> _Gebruiker;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnKlantNummerChanging(int value);
-    partial void OnKlantNummerChanged();
-    partial void OnVoornaamChanging(string value);
-    partial void OnVoornaamChanged();
-    partial void OnAchternaamChanging(string value);
-    partial void OnAchternaamChanged();
-    partial void OntussenvoegselChanging(string value);
-    partial void OntussenvoegselChanged();
-    partial void OnGeboortedatumChanging(System.DateTime value);
-    partial void OnGeboortedatumChanged();
-    partial void OnGeslachtChanging(string value);
-    partial void OnGeslachtChanged();
-    partial void OnAdresChanging(string value);
-    partial void OnAdresChanged();
-    partial void OnPostcodeChanging(string value);
-    partial void OnPostcodeChanged();
-    partial void OnWoonplaatsChanging(string value);
-    partial void OnWoonplaatsChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnuserIDChanging(System.Nullable<int> value);
-    partial void OnuserIDChanged();
-    #endregion
-		
-		public Klanten()
-		{
-			this._Boekingens = new EntitySet<Boekingen>(new Action<Boekingen>(this.attach_Boekingens), new Action<Boekingen>(this.detach_Boekingens));
-			this._Gebruiker = default(EntityRef<Gebruiker>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KlantNummer", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int KlantNummer
-		{
-			get
-			{
-				return this._KlantNummer;
-			}
-			set
-			{
-				if ((this._KlantNummer != value))
-				{
-					this.OnKlantNummerChanging(value);
-					this.SendPropertyChanging();
-					this._KlantNummer = value;
-					this.SendPropertyChanged("KlantNummer");
-					this.OnKlantNummerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Voornaam", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Voornaam
-		{
-			get
-			{
-				return this._Voornaam;
-			}
-			set
-			{
-				if ((this._Voornaam != value))
-				{
-					this.OnVoornaamChanging(value);
-					this.SendPropertyChanging();
-					this._Voornaam = value;
-					this.SendPropertyChanged("Voornaam");
-					this.OnVoornaamChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Achternaam", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Achternaam
-		{
-			get
-			{
-				return this._Achternaam;
-			}
-			set
-			{
-				if ((this._Achternaam != value))
-				{
-					this.OnAchternaamChanging(value);
-					this.SendPropertyChanging();
-					this._Achternaam = value;
-					this.SendPropertyChanged("Achternaam");
-					this.OnAchternaamChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tussenvoegsel", DbType="NVarChar(10)")]
-		public string tussenvoegsel
-		{
-			get
-			{
-				return this._tussenvoegsel;
-			}
-			set
-			{
-				if ((this._tussenvoegsel != value))
-				{
-					this.OntussenvoegselChanging(value);
-					this.SendPropertyChanging();
-					this._tussenvoegsel = value;
-					this.SendPropertyChanged("tussenvoegsel");
-					this.OntussenvoegselChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Geboortedatum", DbType="Date NOT NULL")]
-		public System.DateTime Geboortedatum
-		{
-			get
-			{
-				return this._Geboortedatum;
-			}
-			set
-			{
-				if ((this._Geboortedatum != value))
-				{
-					this.OnGeboortedatumChanging(value);
-					this.SendPropertyChanging();
-					this._Geboortedatum = value;
-					this.SendPropertyChanged("Geboortedatum");
-					this.OnGeboortedatumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Geslacht", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Geslacht
-		{
-			get
-			{
-				return this._Geslacht;
-			}
-			set
-			{
-				if ((this._Geslacht != value))
-				{
-					this.OnGeslachtChanging(value);
-					this.SendPropertyChanging();
-					this._Geslacht = value;
-					this.SendPropertyChanged("Geslacht");
-					this.OnGeslachtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adres", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Adres
-		{
-			get
-			{
-				return this._Adres;
-			}
-			set
-			{
-				if ((this._Adres != value))
-				{
-					this.OnAdresChanging(value);
-					this.SendPropertyChanging();
-					this._Adres = value;
-					this.SendPropertyChanged("Adres");
-					this.OnAdresChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
-		public string Postcode
-		{
-			get
-			{
-				return this._Postcode;
-			}
-			set
-			{
-				if ((this._Postcode != value))
-				{
-					this.OnPostcodeChanging(value);
-					this.SendPropertyChanging();
-					this._Postcode = value;
-					this.SendPropertyChanged("Postcode");
-					this.OnPostcodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Woonplaats", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Woonplaats
-		{
-			get
-			{
-				return this._Woonplaats;
-			}
-			set
-			{
-				if ((this._Woonplaats != value))
-				{
-					this.OnWoonplaatsChanging(value);
-					this.SendPropertyChanging();
-					this._Woonplaats = value;
-					this.SendPropertyChanged("Woonplaats");
-					this.OnWoonplaatsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userID", DbType="Int")]
-		public System.Nullable<int> userID
-		{
-			get
-			{
-				return this._userID;
-			}
-			set
-			{
-				if ((this._userID != value))
-				{
-					if (this._Gebruiker.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnuserIDChanging(value);
-					this.SendPropertyChanging();
-					this._userID = value;
-					this.SendPropertyChanged("userID");
-					this.OnuserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Klanten_Boekingen", Storage="_Boekingens", ThisKey="KlantNummer", OtherKey="Boeking_KlantNr")]
-		public EntitySet<Boekingen> Boekingens
-		{
-			get
-			{
-				return this._Boekingens;
-			}
-			set
-			{
-				this._Boekingens.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gebruiker_Klanten", Storage="_Gebruiker", ThisKey="userID", OtherKey="userID", IsForeignKey=true)]
-		public Gebruiker Gebruiker
-		{
-			get
-			{
-				return this._Gebruiker.Entity;
-			}
-			set
-			{
-				Gebruiker previousValue = this._Gebruiker.Entity;
-				if (((previousValue != value) 
-							|| (this._Gebruiker.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Gebruiker.Entity = null;
-						previousValue.Klantens.Remove(this);
-					}
-					this._Gebruiker.Entity = value;
-					if ((value != null))
-					{
-						value.Klantens.Add(this);
-						this._userID = value.userID;
-					}
-					else
-					{
-						this._userID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Gebruiker");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Boekingens(Boekingen entity)
-		{
-			this.SendPropertyChanging();
-			entity.Klanten = this;
-		}
-		
-		private void detach_Boekingens(Boekingen entity)
-		{
-			this.SendPropertyChanging();
-			entity.Klanten = null;
 		}
 	}
 }
