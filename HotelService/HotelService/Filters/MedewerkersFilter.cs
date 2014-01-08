@@ -18,10 +18,8 @@ namespace HotelService.Filters
                 }
                 else
                 {
-                    ViewResult result = new ViewResult();
-                    result.ViewName = "KlantNotAllowed";
-                    result.ViewBag.ErrorMessage = "Je moet een medewerker zijn om deze pagina te zien...";
-                    filterContext.Result = result;
+                    filterContext.Result = new RedirectResult("~/Home/KlantNotAllowed");
+                    
                 }
                 
             }

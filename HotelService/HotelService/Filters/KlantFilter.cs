@@ -18,10 +18,8 @@ namespace HotelService.Filters
                 }
                 else
                 {
-                    ViewResult result = new ViewResult();
-                    result.ViewName = "MedewerkerNotAllowed";
-                    result.ViewBag.ErrorMessage = "Je moet een klant zijn om deze pagina te zien...";
-                    filterContext.Result = result;
+                    filterContext.Result = new RedirectResult("~/Home/MedewerkerNotAllowed");
+                    
                 }
 
             }

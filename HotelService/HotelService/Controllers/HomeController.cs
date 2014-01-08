@@ -87,5 +87,15 @@ namespace HotelService.Controllers
         {
             return View();
         }
+
+        public ActionResult KlantNotAllowed()
+        {
+            return View();
+        }
+
+        public ActionResult MedewerkerNotAllowed()
+        {
+            return View();
+        }
     }
 }
