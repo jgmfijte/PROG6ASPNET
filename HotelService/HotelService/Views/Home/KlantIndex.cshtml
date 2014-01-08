@@ -1,29 +1,36 @@
-﻿@{
-    ViewBag.Title = "Nieuwe Boeking";
+﻿@model DataAccessLayer.Gebruiker
+
+@{
+    ViewBag.Title = "Index";
 }
 
 <link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
 <div id="wrapper">
     <div id="headerwrap">
-        <div id="header"> <h1> HotelService </h1></div>
+        <div id="header">
+            <h1>HotelService </h1>
+        </div>
     </div>
     <div id="menuwrap">
         <div id="menu">
-            <p> 
+            <p>
+                
                 @Html.ActionLink("Home", "KlantIndex", "Home") | 
-                @Html.ActionLink("Bekijk onze kamers", "KamerOverzicht", "Kamer") | 
+                @Html.ActionLink("Bekijk onze kamers", "KlantKamerOverzicht", "Kamer") | 
                 @Html.ActionLink("Bekijk uw vorige boekingen", "KlantBoekingOverzicht", "Boeking") | 
                 @Html.ActionLink("Log uit", "Logoff", "Home")
             </p>
         </div>
     </div>
     <div id="contentwrap">
-        <div id="content">    
+        <div id="content">
             <h2>@ViewBag.Title</h2>
-            <p>Hier dus de inhoud van deze pagina invullen</p>
+            <p>Welkom terug bij onze hotelservice!</p>
         </div>
     </div>
     <div id="footerwrap">
-        <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+        <div id="footer">
+            <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p>
+        </div>
     </div>
 </div>

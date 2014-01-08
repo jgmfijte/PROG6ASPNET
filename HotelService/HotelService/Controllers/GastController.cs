@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using HotelService.Filters;
 using HotelService.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace HotelService.Controllers
 {
+    [LoggedInFilter]
     public class GastController : Controller
     {
         //
@@ -19,6 +21,7 @@ namespace HotelService.Controllers
             return View();
         }
 
+        [MedewerkersFilter]
         public ActionResult GastOverzicht()
         {
             var result =
@@ -27,29 +30,18 @@ namespace HotelService.Controllers
             return View(result);
         }
 
+        [MedewerkersFilter]
         public ActionResult Create()
         {
             return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Gast gast)
-        {
-            if (ModelState.IsValid)
-            {
-                Console.WriteLine(gast.Voornaam);
-                return RedirectToAction("Index");
-            }
-
-            return View(gast);
-        }
-
+        [MedewerkersFilter]
         public ActionResult Details()
         {
             return View();
         }
 
+        [MedewerkersFilter]
         public ActionResult Delete()
         {
             return View();

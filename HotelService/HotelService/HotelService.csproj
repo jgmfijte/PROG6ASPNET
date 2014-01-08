@@ -116,11 +116,15 @@
     <Compile Include="Controllers\GastController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KamerController.cs" />
+    <Compile Include="Filters\KlantFilter.cs" />
+    <Compile Include="Filters\LoggedInFilter.cs" />
+    <Compile Include="Filters\MedewerkersFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Boeking.cs" />
     <Compile Include="Models\Gast.cs" />
+    <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\Kamer.cs" />
     <Compile Include="Models\SingletonDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +188,12 @@
     <Content Include="Views\Kamer\Edit.cshtml" />
     <Content Include="Views\Kamer\Delete.cshtml" />
     <Content Include="Views\Gast\Edit.cshtml" />
+    <Content Include="Views\Home\KlantIndex.cshtml" />
+    <Content Include="Views\Home\MedewerkersIndex.cshtml" />
+    <Content Include="Views\Home\KlantNotAllowed.cshtml" />
+    <Content Include="Views\Home\MedewerkerNotAllowed.cshtml" />
+    <Content Include="Views\Boeking\KlantBoekingOverzicht.cshtml" />
+    <Content Include="Views\Kamer\KlantKamerOverzicht.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

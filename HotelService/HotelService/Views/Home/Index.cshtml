@@ -1,28 +1,40 @@
-﻿@{
+﻿@model DataAccessLayer.Gebruiker
+
+@{
     ViewBag.Title = "Index";
 }
 
-<link href="./Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/StyleSheet.css" rel="stylesheet" type="text/css" />
 <div id="wrapper">
     <div id="headerwrap">
-        <div id="header"> <h1> HotelService </h1></div>
+        <div id="header">
+            <h1>HotelService </h1>
+        </div>
     </div>
-    <div id="menuwrap">
-        <div id="menu">
-            <p> 
-                @Html.ActionLink("Home", "Index", "Home") | 
-                @Html.ActionLink("Kamers", "KamerOverzicht", "Kamer") | 
-                @Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
-                @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking")
+
+    <div id="contentwrap">
+        <div id="content">
+            <h2>Log hier in:</h2>
+            @using (Html.BeginForm()){
+                <p>userID</p>
+                @Html.EditorFor(model => model.userID)
+                
+                <p>Wachtwoord</p>                
+                @Html.PasswordFor(model => model.wachtwoord)
+                <br />
+                <input type="submit", value="Log in" formaction="Home/Login"/>
+            }
+            <h2>OF:</h2>
+            <p>
+                Bekijk ons aanbod
+            <br />
+                Maak een account
             </p>
         </div>
     </div>
-    <div id="contentwrap">
-        <div id="content">    
-            <h2>@ViewBag.Title</h2>
-        </div>
-    </div>
     <div id="footerwrap">
-        <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+        <div id="footer">
+            <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p>
+        </div>
     </div>
 </div>

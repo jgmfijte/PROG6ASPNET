@@ -1,8 +1,8 @@
 ﻿@model IQueryable<DataAccessLayer.Boekingen>
-
 @{
-    ViewBag.Title = "BoekingOverzicht";
+    ViewBag.Title = "KlantBoekingOverzicht";
 }
+
 <link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
 <div id="wrapper">
     <div id="headerwrap">
@@ -13,10 +13,10 @@
     <div id="menuwrap">
         <div id="menu">
             <p>
-                @Html.ActionLink("Home", "Index", "Home") | 
-                @Html.ActionLink("Kamers", "KlantKamerOverzicht", "Kamer") | 
-                @Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
-                @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking")
+                @Html.ActionLink("Home", "KlantIndex", "Home") | 
+                @Html.ActionLink("Bekijk onze kamers", "KlantKamerOverzicht", "Kamer") | 
+                @Html.ActionLink("Bekijk uw vorige boekingen", "KlantBoekingOverzicht", "Boeking") | 
+                @Html.ActionLink("Log uit", "Logoff", "Home")
             </p>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <h2>@ViewBag.Title</h2>
             
             <p>
-                @Html.ActionLink("Create New", "Create")
+                @Html.ActionLink("Boek een nieuw verblijf", "Create")
             </p>
             <table>
                 <tr>
@@ -44,11 +44,6 @@
                         <td>@boeking.Startdatum</td>
                         <td>@boeking.Einddatum</td>
                         <td>@boeking.Boeking_KlantNr</td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | 
-                            <a href= "#" onclick="OpenDeleteWarning()">Delete</a> | 
-                            @Html.ActionLink("Klant Details", "Details", "Gast")
-                        </td>
                     </tr>
                 }
 

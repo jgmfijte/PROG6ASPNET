@@ -1,0 +1,100 @@
+﻿@model IQueryable<DataAccessLayer.Hotelkamer>
+
+@{
+    ViewBag.Title = "Overzicht";
+}
+
+<link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+<div id="wrapper">
+    <div id="headerwrap">
+        <div id="header">
+            <h1>HotelService </h1>
+        </div>
+    </div>
+    <div id="menuwrap">
+        <div id="menu">
+            <p>
+                @Html.ActionLink("Home", "KlantIndex", "Home") | 
+                @Html.ActionLink("Bekijk onze kamers", "KlantKamerOverzicht", "Kamer") | 
+                @Html.ActionLink("Bekijk uw vorige boekingen", "KlantBoekingOverzicht", "Boeking") | 
+                @Html.ActionLink("Log uit", "Logoff", "Home")
+            </p>
+        </div>
+    </div>
+    <div id="contentwrap">
+        <div id="content">
+            @{
+                decimal norm2 = 0;
+                decimal norm3 = 0;
+                decimal norm5 = 0;
+                decimal luxe2 = 0;
+                decimal luxe3 = 0;
+                decimal luxe5 = 0;
+                foreach(var item in Model) 
+                {
+                    if (item.KamerNummer == 1)
+                    {
+                        norm2 = item.MinimumPrijs;
+                    }
+                    else if (item.KamerNummer == 4) 
+                    {
+                        norm3 = item.MinimumPrijs;
+                    }
+                    else if (item.KamerNummer == 7)
+                    {
+                        norm5 = item.MinimumPrijs;
+                    }
+                    else if (item.KamerNummer == 10)
+                    {
+                        luxe2 = item.MinimumPrijs;
+                    }
+                    else if (item.KamerNummer == 11)
+                    {
+                        luxe3 = item.MinimumPrijs;
+                    }
+                    else if (item.KamerNummer == 12)
+                    {
+                        luxe5 = item.MinimumPrijs;
+                    }
+                }
+            }
+            <h2>@ViewBag.Title</h2>
+            <h4>2 Persoons appartementen</h4>
+            <p>Deze kamers geven een heerlijk gevoel van rust voor 2 personen. We verhuren deze kamers al vanaf
+               @norm2 euro per nacht. In uw kamer heeft u uw eigen douche en toilet en een tweepersoonsbed.
+            </p>
+            <h4>3 Persoons appartementen</h4>
+            <p>Deze kamers geven een heerlijk gevoel van rust voor 3 personen. We verhuren deze kamers al vanaf
+               @norm3 euro per nacht. In uw kamer heeft u uw eigen douche en toilet en drie eenpersoonsbedden.
+                Deze zijn eventueel te verschuiven.
+            </p>
+            <h4>5 Persoons appartementen</h4>
+            <p>Deze kamers geven een heerlijk gevoel van rust voor 5 personen. We verhuren deze kamers al vanaf
+               @norm5 euro per nacht. In uw kamer heeft u uw eigen douche en toilet. Een kamer met een tweepersoonsbed 
+                en een kamer met drie eenpersoonsbedden. Deze zijn eventueel te verschuiven.
+            </p>
+            <h4>Luxe 2 persoons appartement</h4>
+            <p>Deze kamers geven een heerlijk gevoel van rust en laten u baden in luxe. We verhuren deze kamers al vanaf
+               @luxe2 euro per nacht. In uw kamer heeft u uw eigen douche en toilet en een tweepersoonsbed. Ook kunt u
+                genieten van een heerlijk bad en heeft u prachtig uitzicht over de stad.
+            </p>
+            <h4>Luxe 3 persoons appartement</h4>
+            <p>Deze kamers geven een heerlijk gevoel van rust voor 3 personen en laten u baden in luxe. We verhuren deze kamers al vanaf
+               @luxe3 euro per nacht. In uw kamer heeft u uw eigen douche en toilet en drie eenpersoonsbedden.
+                Deze zijn eventueel te verschuiven. Ook kunt u genieten van een heerlijk bad en heeft u prachtig 
+                uitzicht over de stad.
+            </p>
+            <h4>Luxe 5 persoons appartement</h4>
+            <p>Deze kamers geven een heerlijk gevoel van rust voor 5 personen. We verhuren deze kamers al vanaf
+               @luxe5 euro per nacht. In uw kamer heeft u uw eigen douche en toilet. Een kamer met een tweepersoonsbed 
+                en een kamer met drie eenpersoonsbedden. Deze zijn eventueel te verschuiven. Ook kunt u genieten van een 
+                heerlijk bad en heeft u prachtig uitzicht over de stad.
+            </p>
+            
+        </div>
+    </div>
+    <div id="footerwrap">
+        <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+    </div>
+</div>
+
