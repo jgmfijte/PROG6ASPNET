@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HotelService.Models.Gast
+@{
     ViewBag.Title = "Nieuwe Gast";
 }
 
@@ -21,57 +22,55 @@
         <div id="content">    
             <h2>@ViewBag.Title</h2>
             <p>Vul hieronder de informatie van de nieuwe gast in.</p>
-            <table>
-                <tr>
-                    <td>Voornaam</td>
-                    <td>@Html.TextBox("voornaam") </td>
-                </tr>
-                <tr>
-                    <td>Achternaam</td>
-                    <td>@Html.TextBox("achternaam")</td>
-                </tr>
-                <tr>
-                    <td>Geboortedatum (DD-MM-JJ)</td>
-                    <td>@Html.TextBox("Geboortedatum")</td>
-                </tr>
-                <tr>
-                    <td>Man/Vrouw</td>
-                    <td>@{List<SelectListItem> items = new List<SelectListItem>();
-                        items.Add(new SelectListItem
-                        {
-                            Text = "Man",
-                            Value = "1",
-                            Selected = true
-                        });
-                        items.Add(new SelectListItem
-                        {
-                            Text = "Vrouw",
-                            Value = "2",
-                            Selected = false
-                        });
-                        }
-                        @Html.DropDownList("manVrouwDropdown", items)
-                    </td>
-                </tr>
-                <tr>
-                    <td>Adres</td>
-                    <td>@Html.TextBox("adres")</td>
-                </tr>
-                <tr>
-                    <td>Postcode</td>
-                    <td>@Html.TextBox("postcode")</td>
-                </tr>
-                <tr>
-                    <td>Woonplaats</td>
-                    <td>@Html.TextBox("woonplaats")</td>
-                </tr>
-                <tr>
-                    <td>E-mailadres</td>
-                    <td>@Html.TextBox("emailadres")</td>
-                </tr>
-            </table>
+            
+            @using (Html.BeginForm())
+            { 
+                <fieldset>
+	                <legend>Nieuwe gast</legend>
+                    
+	                <p>
+                        Voornaam:
+                        @Html.EditorFor(model => model.Voornaam)
+	                </p>
 
-            <input type="button" title="Create" value="C" onclick="location.href='@Url.Action("Create")'" />
+                    <p>
+                        Achternaam
+                        @Html.EditorFor(model => model.Achternaam)
+                    </p>
+
+                    <p>
+                        Geboortedatum (DD-MM-JJ)
+                        @Html.EditorFor(model => model.Geboortedatum)
+                    </p>
+
+                    <p>
+                        Man/Vrouw
+                        @Html.EditorFor(model => model.Geslacht)
+                    </p>
+
+                    <p>
+                        Adres
+                        @Html.EditorFor(model => model.Adres)
+                    </p>
+
+                    <p>
+                        Postcode
+                        @Html.EditorFor(model => model.Postcode)
+                    </p>
+
+                    <p>
+                        Woonplaats
+                        @Html.EditorFor(model => model.Woonplaats)
+                    </p>
+
+                    <p>
+                        E-mailadres
+                        @Html.EditorFor(model => model.Email)
+                    </p>
+
+	                <p><input type="submit" value="Nieuwe gast aanmaken" /></p>
+                </fieldset>
+            }
 </div>
     </div>
     <div id="footerwrap">

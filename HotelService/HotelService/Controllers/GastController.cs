@@ -35,6 +35,15 @@ namespace HotelService.Controllers
         {
             return View();
         }
+
+        [MedewerkersFilter]
+        [HttpPost]
+        public ActionResult Create(Gast gastje)
+        {
+            //invoeren in db
+            return View();
+        }
+
         [MedewerkersFilter]
         public ActionResult Details()
         {
