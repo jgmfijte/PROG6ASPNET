@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using HotelService.MailHandler;
 using HotelService.Filters;
 using HotelService.Models;
 using System;
