@@ -1,93 +1,93 @@
 ﻿@model DataAccessLayer.Klanten
 @{
-    ViewBag.Title = "Nieuwe Gast";
+	ViewBag.Title = "Nieuwe Gast";
 }
 
 <link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
 <div id="wrapper">
-    <div id="headerwrap">
-        <div id="header"> <h1> HotelService </h1></div>
-    </div>
-    <div id="menuwrap">
-        <div id="menu">
-            <p> 
-                @Html.ActionLink("Home", "Index", "Home") | 
-                @Html.ActionLink("Kamers", "KamerOverzicht", "Kamer") | 
-                @Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
-                @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking")
-            </p>
-        </div>
-    </div>
-    <div id="contentwrap">
-        <div id="content">    
-            <h2>@ViewBag.Title</h2>
-            <p>Vul hieronder de informatie van de nieuwe gast in.</p>
-            
-            @using (Html.BeginForm("Created", "Gast", FormMethod.Post))
-            { 
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-                <fieldset>
-	                <legend>Nieuwe gast</legend>
-                    
-	                <p>
-                        Voornaam:
-                        @Html.EditorFor(model => model.Voornaam)
-                        @Html.ValidationMessageFor(model => model.Voornaam)
-	                </p>
-                    <p>
-                        Tussenvoegsel:
-                        @Html.EditorFor(model => model.tussenvoegsel)
-	                </p>
+	<div id="headerwrap">
+		<div id="header"> <h1> HotelService </h1></div>
+	</div>
+	<div id="menuwrap">
+		<div id="menu">
+			<p> 
+				@Html.ActionLink("Home", "Index", "Home") | 
+				@Html.ActionLink("Kamers", "KamerOverzicht", "Kamer") | 
+				@Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
+				@Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking")
+			</p>
+		</div>
+	</div>
+	<div id="contentwrap">
+		<div id="content">    
+			<h2>@ViewBag.Title</h2>
+			<p>Vul hieronder de informatie van de nieuwe gast in.</p>
+			
+			@using (Html.BeginForm("Created", "Gast", FormMethod.Post))
+			{ 
+				@Html.AntiForgeryToken()
+				@Html.ValidationSummary(true)
+				<fieldset>
+					<legend>Nieuwe gast</legend>
+					
+					<p>
+						Voornaam:
+						@Html.EditorFor(model => model.Voornaam)
+						@Html.ValidationMessageFor(model => model.Voornaam)
+					</p>
+					<p>
+						Tussenvoegsel:
+						@Html.EditorFor(model => model.tussenvoegsel)
+					</p>
 
-                    <p>
-                        Achternaam
-                        @Html.EditorFor(model => model.Achternaam)
-                        @Html.ValidationMessageFor(model => model.Achternaam)
-                    </p>
+					<p>
+						Achternaam
+						@Html.EditorFor(model => model.Achternaam)
+						@Html.ValidationMessageFor(model => model.Achternaam)
+					</p>
 
-                    <p>
-                        Geboortedatum (DD-MM-JJ)
-                        @Html.EditorFor(model => model.Geboortedatum)
-                        @Html.ValidationMessageFor(model => model.Geboortedatum)
-                    </p>
+					<p>
+						Geboortedatum (DD-MM-JJ)
+						@Html.EditorFor(model => model.Geboortedatum)
+						@Html.ValidationMessageFor(model => model.Geboortedatum)
+					</p>
 
-                    <p>
-                        Man/Vrouw
-                        @Html.EditorFor(model => model.Geslacht)
-                        @Html.ValidationMessageFor(model => model.Geslacht)
-                    </p>
+					<p>
+						Man/Vrouw
+						@Html.EditorFor(model => model.Geslacht)
+						@Html.ValidationMessageFor(model => model.Geslacht)
+					</p>
 
-                    <p>
-                        Adres
-                        @Html.EditorFor(model => model.Adres)
-                        @Html.ValidationMessageFor(model => model.Adres)
-                    </p>
+					<p>
+						Adres
+						@Html.EditorFor(model => model.Adres)
+						@Html.ValidationMessageFor(model => model.Adres)
+					</p>
 
-                    <p>
-                        Postcode
-                        @Html.EditorFor(model => model.Postcode)
-                        @Html.ValidationMessageFor(model => model.Postcode)
-                    </p>
+					<p>
+						Postcode
+						@Html.EditorFor(model => model.Postcode)
+						@Html.ValidationMessageFor(model => model.Postcode)
+					</p>
 
-                    <p>
-                        Woonplaats
-                        @Html.EditorFor(model => model.Woonplaats)
-                        @Html.ValidationMessageFor(model => model.Woonplaats)
-                    </p>
+					<p>
+						Woonplaats
+						@Html.EditorFor(model => model.Woonplaats)
+						@Html.ValidationMessageFor(model => model.Woonplaats)
+					</p>
 
-                    <p>
-                        E-mailadres
-                        @Html.EditorFor(model => model.Email)
-                        @Html.ValidationMessageFor(model => model.Email)
-                    </p>
+					<p>
+						E-mailadres
+						@Html.EditorFor(model => model.Email)
+						@Html.ValidationMessageFor(model => model.Email)
+					</p>
 
-	                <p><input type="submit" value="Nieuwe gast aanmaken" /></p>
-                </fieldset>
-            }
+					<p><input type="submit" value="Nieuwe gast aanmaken" /></p>
+				</fieldset>
+			}
 </div>
-    </div>
-    <div id="footerwrap">
-        <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
-    </div>
+	</div>
+	<div id="footerwrap">
+		<div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+	</div>
 </div>

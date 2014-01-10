@@ -39,6 +39,21 @@ namespace HotelService.Controllers
         }
 
         [MedewerkersFilter]
+        [HttpPost]
+        public ActionResult Created(DataAccessLayer.Hotelkamer kamer)
+        {
+            if (ModelState.IsValid)
+            {
+
+                context.Hotelkamers.InsertOnSubmit(kamer);
+                context.SubmitChanges();
+                return View();
+            }
+            //invoeren in db
+            return View("Create", kamer);
+        }
+
+        [MedewerkersFilter]
         public ActionResult Create()
         {
             return View();
