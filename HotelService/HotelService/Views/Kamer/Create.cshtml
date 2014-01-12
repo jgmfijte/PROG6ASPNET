@@ -1,4 +1,4 @@
-﻿@model HotelService.Models.Kamer
+﻿@model DataAccessLayer.Hotelkamer
 @{
 	ViewBag.Title = "Nieuwe Kamer";
 }
@@ -24,35 +24,35 @@
 			<p>Hier kun je een kamer aanmaken.</p>
 			@using (Html.BeginForm("Created", "Kamer", FormMethod.Post))
 			{ 
-                @Html.AntiForgeryToken()
+				@Html.AntiForgeryToken()
 				@Html.ValidationSummary(true)
-                
+				
 				<fieldset>
 					<legend>Nieuwe kamer</legend>
 					
 					<p>
 						Aantal Personen
 						@Html.EditorFor(model => model.AantalPersonen)
-                        @Html.ValidationMessageFor(model => model.AantalPersonen)
+						@Html.ValidationMessageFor(model => model.AantalPersonen)
 					</p>
 
 					<p>
 						Kamernummer
 						@Html.EditorFor(model => model.KamerNummer)
-                        @Html.ValidationMessageFor(model => model.KamerNummer)
+						@Html.ValidationMessageFor(model => model.KamerNummer)
 					</p>
 
 					<p>
 						Actuele prijs
 						@Html.EditorFor(model => model.ActuelePrijs)
-                        @Html.ValidationMessageFor(model => model.ActuelePrijs)
+						@Html.ValidationMessageFor(model => model.ActuelePrijs)
 					</p>
 
-                    <p>
-                        Minimumprijs
-                        @Html.EditorFor(model => model.MinimumPrijs)
-                        @Html.ValidationMessageFor(model => model.MinimumPrijs)
-                                                    </p>
+					<p>
+						Minimumprijs
+						@Html.EditorFor(model => model.MinimumPrijs)
+						@Html.ValidationMessageFor(model => model.MinimumPrijs)
+													</p>
 
 					<p><input type="submit" value="Nieuwe kamer aanmaken" /></p>
 				</fieldset>

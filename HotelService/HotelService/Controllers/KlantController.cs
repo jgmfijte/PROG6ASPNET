@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace HotelService.Controllers
 {
-    public class GebruikerController : Controller
+    public class KlantController : Controller
     {
         DatabaseClassesDataContext context = SingletonDatabase.Instance;
 
@@ -24,12 +24,22 @@ namespace HotelService.Controllers
         // POST: /Gebruiker/Create
 
         [HttpPost]
-        public ActionResult Created(DataAccessLayer.Gebruiker gebruiker)
+        public ActionResult Created(DataAccessLayer.Klanten klant)
         {
+            DataAccessLayer.Gebruiker gebruiker = new Gebruiker();
+            int maxID = context.Gebruikers.Max(u => u.userID);
+
+            gebruiker.Voornaam = klant.Voornaam;
+            gebruiker.Achternaam = klant.Achternaam;
+            gebruiker.tussenvoegsel = klant.tussenvoegsel;
             gebruiker.rol = "Klant";
-            int maxUsernr = context.Gebruikers.Max(u => u.userID);
-            gebruiker.userID = maxUsernr + 1;
+            gebruiker.userID = maxID + 1;
+            gebruiker.wachtwoord = klant.password;
+            klant.userID = maxID + 1;
+
             context.Gebruikers.InsertOnSubmit(gebruiker);
+            context.SubmitChanges();
+            context.Klantens.InsertOnSubmit(klant);
             context.SubmitChanges();
             return View();
         }       
