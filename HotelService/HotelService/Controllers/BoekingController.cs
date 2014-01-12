@@ -23,11 +23,36 @@ namespace HotelService.Controllers
         }
 
         [MedewerkersFilter]
-        public ActionResult BoekingOverzicht()
+        public ActionResult BoekingOverzicht(DateTime? Startdate, DateTime? Enddate)
         {
-            var result =
+            IQueryable<DataAccessLayer.Boekingen> result;
+            if (Startdate != null)
+            {
+                if (Enddate != null)
+                {
+                    result = from b in context.Boekingens
+                             where b.Startdatum > Startdate && b.Einddatum < Enddate
+                             select b;
+                }
+                else
+                {
+                    result = from b in context.Boekingens
+                             where b.Startdatum > Startdate
+                             select b;
+                }
+            }
+            else if (Enddate != null)
+            {
+                result = from b in context.Boekingens
+                         where b.Einddatum < Enddate
+                         select b;
+            }
+            else
+            {
+                result =
                 from b in context.Boekingens
                 select b;
+            }
             return View(result);
         }
 
@@ -65,6 +90,7 @@ namespace HotelService.Controllers
      
             return View();
         }
+<<<<<<< .merge_file_a06260
 
         [MedewerkersFilter]
         [HttpPost]
@@ -87,6 +113,9 @@ namespace HotelService.Controllers
         {
             return View();
         }
+=======
+        
+>>>>>>> .merge_file_a03964
         [MedewerkersFilter]
         public ActionResult Delete(int boekingsNr)
         {
@@ -116,6 +145,35 @@ namespace HotelService.Controllers
                 // Provide for exceptions.
             }
             return View();
+        }
+
+        [MedewerkersFilter]
+        public ActionResult Edit(int boekingsNr)
+        {
+            var queryResult = from k in context.Boekingens
+                              where k.BoekingsNr == boekingsNr
+                              select k;
+            return View(queryResult.FirstOrDefault());
+        }
+        [MedewerkersFilter]
+        public ActionResult Edited(int BoekingsNr, int Boeking_KamerNr, DateTime Startdatum, DateTime Einddatum, int Boeking_KlantNr)
+        {
+            var query = from boeking in context.Boekingens
+                        where boeking.BoekingsNr == BoekingsNr
+                        select boeking;
+            foreach (var boeking in query)
+            {
+                boeking.BoekingsNr = BoekingsNr;
+                boeking.Boeking_KamerNr = Boeking_KamerNr;
+                boeking.Startdatum = Startdatum;
+                boeking.Einddatum = Einddatum;
+                boeking.Boeking_KlantNr = Boeking_KlantNr;
+            }
+            context.SubmitChanges();
+
+            var allBookings = from booking in context.Boekingens
+                            select booking;
+            return View("BoekingOverzicht", allBookings);
         }
     }
 }

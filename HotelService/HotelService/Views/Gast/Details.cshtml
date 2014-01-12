@@ -1,4 +1,4 @@
-﻿@model HotelService.Models.Gast
+﻿@model DataAccessLayer.Klanten
 @{
     ViewBag.Title = "Details gast";
 }
@@ -6,25 +6,57 @@
 <link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
 <div id="wrapper">
     <div id="headerwrap">
-        <div id="header"> <h1> HotelService </h1></div>
+        <div id="header">
+            <h1>HotelService </h1>
+        </div>
     </div>
     <div id="menuwrap">
         <div id="menu">
-            <p> 
+            <p>
                 @Html.ActionLink("Home", "Index", "Home") | 
                 @Html.ActionLink("Kamers", "KamerOverzicht", "Kamer") | 
                 @Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
-                @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking")
+                @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking") |
+                @Html.ActionLink("Log uit", "Logoff", "Home")
             </p>
         </div>
     </div>
     <div id="contentwrap">
-        <div id="content">    
+        <div id="content">
             <h2>@ViewBag.Title</h2>
-            <p>Hier dus de inhoud van deze pagina invullen</p>
+            <table>
+                <tr>
+                    <th>Voornaam</th>
+                    <th>Tussenvoegsel</th>
+                    <th>Achternaam</th>
+                    <th>Geboortedatum</th>
+                    <th>M/V</th>
+                    <th>Adres</th>
+                    <th>Postcode</th>
+                    <th>Woonplaats</th>
+                    <th>E-mail</th>
+                </tr>
+                <tr>
+                    <td>@Model.Voornaam</td>
+                    <td>@Model.tussenvoegsel</td>
+                    <td>@Model.Achternaam</td>
+                    <td>@Model.Geboortedatum</td>
+                    <td>@Model.Geslacht</td>
+                    <td>@Model.Adres</td>
+                    <td>@Model.Postcode</td>
+                    <td>@Model.Woonplaats</td>
+                    <td>@Model.Email</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { klantNr = Model.KlantNummer })
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div id="footerwrap">
-        <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+        <div id="footer">
+            <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p>
+        </div>
     </div>
 </div>

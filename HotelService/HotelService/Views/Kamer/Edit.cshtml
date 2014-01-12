@@ -1,15 +1,19 @@
-﻿@{
+﻿@model DataAccessLayer.Hotelkamer
+
+@{
     ViewBag.Title = "Wijzig Kamer";
 }
 
 <link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
 <div id="wrapper">
     <div id="headerwrap">
-        <div id="header"> <h1> HotelService </h1></div>
+        <div id="header">
+            <h1>HotelService </h1>
+        </div>
     </div>
     <div id="menuwrap">
         <div id="menu">
-            <p> 
+            <p>
                 @Html.ActionLink("Home", "Index", "Home") | 
                 @Html.ActionLink("Kamers", "KamerOverzicht", "Kamer") | 
                 @Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
@@ -19,12 +23,34 @@
         </div>
     </div>
     <div id="contentwrap">
-        <div id="content">    
+        <div id="content">
             <h2>@ViewBag.Title</h2>
-            <p>Hier dus de inhoud van deze pagina invullen</p>
+            @using (Html.BeginForm("Edited", "Kamer", FormMethod.Post))
+            {
+                <p>
+                    Kamer nummer
+                @Html.DisplayFor(model => model.KamerNummer)
+                </p>
+                <p>
+                    Aantal Personen
+                @Html.DisplayFor(model => model.AantalPersonen)
+                </p>
+                <p>
+                    Prijs per nacht
+                @Html.EditorFor(model => model.ActuelePrijs)
+                </p>
+                <p>
+                    Minimum prijs
+                @Html.EditorFor(model => model.MinimumPrijs)
+                </p>
+                <p>
+                    <input type="submit" value="Wijzig" /></p>
+            }
         </div>
     </div>
     <div id="footerwrap">
-        <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+        <div id="footer">
+            <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p>
+        </div>
     </div>
 </div>

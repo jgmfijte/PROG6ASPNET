@@ -32,6 +32,7 @@
             <table>
                 <tr>
                     <th>Voornaam</th>
+                    <th>tussenvoegsel</th>
                     <th>Achternaam</th>
                     <th>Geboortedatum</th>
                     <th>M/V</th>
@@ -44,6 +45,7 @@
                 @foreach (DataAccessLayer.Klanten klant in Model) {
                     <tr>
                         <td>@klant.Voornaam</td>
+                        <td>@klant.tussenvoegsel</td>
                         <td>@klant.Achternaam</td>
                         <td>@klant.Geboortedatum</td>
                         <td>@klant.Geslacht</td>
@@ -52,7 +54,7 @@
                         <td>@klant.Woonplaats</td>
                         <td>@klant.Email</td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Edit", "Edit", new { klantNr = klant.KlantNummer }) |
                             @Html.ActionLink("Delete", "Delete", new { klantNr=klant.KlantNummer }) 
                         </td>
                     </tr>

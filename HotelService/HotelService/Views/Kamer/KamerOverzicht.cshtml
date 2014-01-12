@@ -44,7 +44,7 @@
                         <td>@kamer.ActuelePrijs</td>
                         <td>@kamer.MinimumPrijs</td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Edit", "Edit", new { kamerNr=kamer.KamerNummer }) |
                             @Html.ActionLink("Delete", "Delete", new { kamerNr=kamer.KamerNummer }) 
                         </td>
                     </tr>
