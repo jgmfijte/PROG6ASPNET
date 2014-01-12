@@ -45,7 +45,7 @@
                         <td>@kamer.MinimumPrijs</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            <a href= "#" onclick="OpenDeleteWarning()">Delete</a>
+                            @Html.ActionLink("Delete", "Delete", new { kamerNr=kamer.KamerNummer }) 
                         </td>
                     </tr>
                 }

@@ -60,11 +60,35 @@ namespace HotelService.Controllers
         }
 
         [MedewerkersFilter]
-        public ActionResult Delete()
+        public ActionResult Delete(int kamerNr)
         {
+            var queryResult = from s in context.Hotelkamers
+                              where s.KamerNummer == kamerNr
+                              select s;
+            return View(queryResult.FirstOrDefault());
+        }
+        public ActionResult Deleted(int kamerNr)
+        {
+            var deleteKamers = from kamer in context.Hotelkamers
+                                  where kamer.KamerNummer == kamerNr
+                                  select kamer;
+
+            foreach (var kamer in deleteKamers)
+            {
+                context.Hotelkamers.DeleteOnSubmit(kamer);
+            }
+
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
             return View();
         }
-
         [MedewerkersFilter]
         public ActionResult Edit()
         {

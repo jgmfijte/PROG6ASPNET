@@ -1,7 +1,5 @@
-﻿@model DataAccessLayer.Klanten
-
-@{
-    ViewBag.Title = "Verwijder Klant";
+﻿@{
+    ViewBag.Title = "Deleted";
 }
 
 <link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
@@ -25,14 +23,7 @@
     <div id="contentwrap">
         <div id="content">
             <h2>@ViewBag.Title</h2>
-            <p>@Html.DisplayFor(model => model.KlantNummer)</p>
-            @{ int Boeking = Model.KlantNummer; }
-            @using (Html.BeginForm("Deleted", "Gast", new { klantNr= Boeking }, FormMethod.Post, null))
-            {
-                <p>Weet je zeker dat je deze gast wilt verwijderen?</p>
-                <input type="submit" value="Verwijder">
-            }
-            <a class="btn" href="~/Gast/GastOverzicht">Cancel</a>
+            <p>U heeft een gast verwijderd!</p>
         </div>
     </div>
     <div id="footerwrap">

@@ -207,6 +207,8 @@
     <Content Include="Views\Gast\Created.cshtml" />
     <Content Include="Views\Kamer\Created.cshtml" />
     <Content Include="Views\Boeking\Deleted.cshtml" />
+    <Content Include="Views\Gast\Deleted.cshtml" />
+    <Content Include="Views\Kamer\Deleted.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -53,7 +53,7 @@
                         <td>@klant.Email</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            <a href= "#" onclick="OpenDeleteWarning()">Delete</a>
+                            @Html.ActionLink("Delete", "Delete", new { klantNr=klant.KlantNummer }) 
                         </td>
                     </tr>
                 }
