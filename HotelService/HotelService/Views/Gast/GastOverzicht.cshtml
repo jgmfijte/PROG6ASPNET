@@ -17,7 +17,8 @@
                 @Html.ActionLink("Home", "Index", "Home") | 
                 @Html.ActionLink("Kamers", "KamerOverzicht", "Kamer") | 
                 @Html.ActionLink("Gasten", "GastOverzicht", "Gast") |
-                @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking")
+                @Html.ActionLink("Boekingen", "BoekingOverzicht", "Boeking") |
+                @Html.ActionLink("Log uit", "Logoff", "Home")
             </p>
         </div>
     </div>
@@ -52,7 +53,7 @@
                         <td>@klant.Email</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            <a href= "#" onclick="OpenDeleteWarning()">Delete</a>
                         </td>
                     </tr>
                 }
@@ -66,3 +67,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function OpenDeleteWarning() {
+        var userWidth = screen.availWidth;
+        var userHeight = screen.availHeight;
+        leftPos = (userWidth - 300) / 2,
+        topPos = (userHeight - 180) / 2;
+        settings = 'modal,scrollBars=no,resizable=no,toolbar=no,menubar=no,location=no,directories=no,left=' + leftPos + ',top=' + topPos + ',width=300, height=180';
+
+        window.open("Delete", "popup", settings);
+    }
+    </script>
