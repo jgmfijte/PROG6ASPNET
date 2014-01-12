@@ -30,22 +30,25 @@ namespace HotelService.Controllers
             if (userResult != null)
             {
                 DataAccessLayer.Gebruiker found = userResult.FirstOrDefault();
-                HttpCookie login = new HttpCookie("LoginCookie");
-                login.Values.Add("voornaam", found.Voornaam);
-                login.Values.Add("tussenvoegsel", found.tussenvoegsel);
-                login.Values.Add("achternaam", found.Achternaam);
-                login.Values.Add("rol", found.rol);
-                login.Values.Add("userID", found.userID.ToString());
-                login.Expires = DateTime.Now.AddHours(4);
-                Response.Cookies.Add(login);
+                if (found != null)
+                {
+                    HttpCookie login = new HttpCookie("LoginCookie");
+                    login.Values.Add("voornaam", found.Voornaam);
+                    login.Values.Add("tussenvoegsel", found.tussenvoegsel);
+                    login.Values.Add("achternaam", found.Achternaam);
+                    login.Values.Add("rol", found.rol);
+                    login.Values.Add("userID", found.userID.ToString());
+                    login.Expires = DateTime.Now.AddHours(4);
+                    Response.Cookies.Add(login);
 
-                if (found.rol == "Klant")
-                {
-                    return View("KlantIndex");
-                }
-                else if (found.rol == "Medewerker")
-                {
-                    return View("MedewerkersIndex");
+                    if (found.rol == "Klant")
+                    {
+                        return View("KlantIndex");
+                    }
+                    else if (found.rol == "Medewerker")
+                    {
+                        return View("MedewerkersIndex");
+                    }
                 }
             }
             return View("Index");

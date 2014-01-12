@@ -41,7 +41,7 @@ namespace HotelService.Controllers
                 from b in context.Boekingens
                 where b.Boeking_KlantNr == user
                 select b;
-            
+
             return View(result);
         }
 
@@ -49,13 +49,39 @@ namespace HotelService.Controllers
         {
             return View();
         }
-
+        [MedewerkersFilter]
         public ActionResult Edit()
         {
             return View();
         }
-        public ActionResult Delete()
+        [MedewerkersFilter]
+        public ActionResult Delete(int boekingsNr)
         {
+            var queryResult = from s in context.Boekingens
+                              where s.BoekingsNr == boekingsNr
+                              select s;
+            return View(queryResult.FirstOrDefault());
+        }
+        public ActionResult Deleted(int boekingsNr)
+        {
+            var deleteBoekingen = from boeking in context.Boekingens
+                                     where boeking.BoekingsNr == boekingsNr
+                                     select boeking;
+
+            foreach (var boeking in deleteBoekingen)
+            {
+                context.Boekingens.DeleteOnSubmit(boeking);
+            }
+
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
             return View();
         }
     }

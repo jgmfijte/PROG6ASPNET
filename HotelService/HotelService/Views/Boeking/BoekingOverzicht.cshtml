@@ -47,7 +47,7 @@
                         <td>@boeking.Boeking_KlantNr</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | 
-                            <a href= "#" onclick="OpenDeleteWarning()">Delete</a> | 
+                            @Html.ActionLink("Delete", "Delete", new { boekingsNr=boeking.BoekingsNr }) | 
                             @Html.ActionLink("Klant Details", "Details", "Gast")
                         </td>
                     </tr>
