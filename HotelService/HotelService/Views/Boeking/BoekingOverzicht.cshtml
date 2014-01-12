@@ -25,9 +25,20 @@
         <div id="content">
             <h2>@ViewBag.Title</h2>
             
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
+            @using (Html.BeginForm("BoekingOverzicht", "Boeking", FormMethod.Post))
+            {
+                <p>
+                    Startdatum
+                @Html.Editor("Startdate")
+                </p>
+                <p>
+                    Einddatum
+                @Html.Editor("Enddate")
+                </p>
+                
+                <p>
+                    <input type="submit" value="Zoek" /></p>
+            }
             <table>
                 <tr>
                     <th>ID</th>

@@ -23,11 +23,36 @@ namespace HotelService.Controllers
         }
 
         [MedewerkersFilter]
-        public ActionResult BoekingOverzicht()
+        public ActionResult BoekingOverzicht(DateTime? Startdate, DateTime? Enddate)
         {
-            var result =
+            IQueryable<DataAccessLayer.Boekingen> result;
+            if (Startdate != null)
+            {
+                if (Enddate != null)
+                {
+                    result = from b in context.Boekingens
+                             where b.Startdatum > Startdate && b.Einddatum < Enddate
+                             select b;
+                }
+                else
+                {
+                    result = from b in context.Boekingens
+                             where b.Startdatum > Startdate
+                             select b;
+                }
+            }
+            else if (Enddate != null)
+            {
+                result = from b in context.Boekingens
+                         where b.Einddatum < Enddate
+                         select b;
+            }
+            else
+            {
+                result =
                 from b in context.Boekingens
                 select b;
+            }
             return View(result);
         }
 
