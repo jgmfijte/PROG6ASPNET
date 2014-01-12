@@ -90,9 +90,30 @@ namespace HotelService.Controllers
             return View();
         }
         [MedewerkersFilter]
-        public ActionResult Edit()
+        public ActionResult Edit(int kamerNr)
         {
-            return View();
+            var queryResult = from k in context.Hotelkamers
+                              where k.KamerNummer == kamerNr
+                              select k;
+            return View(queryResult.FirstOrDefault());
+        }
+        [MedewerkersFilter]
+        public ActionResult Edited(int KamerNummer, int AantalPersonen, decimal ActuelePrijs, decimal MinimumPrijs)
+        {
+            var query = from kamer in context.Hotelkamers
+                        where kamer.KamerNummer == KamerNummer
+                        select kamer;
+            foreach (var kamer in query)
+            {
+                kamer.AantalPersonen = AantalPersonen;
+                kamer.ActuelePrijs = ActuelePrijs;
+                kamer.MinimumPrijs = MinimumPrijs;
+            }
+            context.SubmitChanges();
+
+            var allRooms = from kamer in context.Hotelkamers
+                           select kamer;
+            return View("KamerOverzicht", allRooms);
         }
     }
 }

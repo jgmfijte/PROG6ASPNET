@@ -52,9 +52,12 @@ namespace HotelService.Controllers
         }
 
         [MedewerkersFilter]
-        public ActionResult Details()
+        public ActionResult Details(int klantNr)
         {
-            return View();
+            var queryResult = from s in context.Klantens
+                              where s.KlantNummer == klantNr
+                              select s;
+            return View(queryResult.FirstOrDefault());
         }
 
         [MedewerkersFilter]
@@ -87,9 +90,37 @@ namespace HotelService.Controllers
             
             return View();
         }
-        public ActionResult Edit()
-        { 
-            return View(); 
+        [MedewerkersFilter]
+        public ActionResult Edit(int klantNr)
+        {
+            var queryResult = from k in context.Klantens
+                              where k.KlantNummer == klantNr
+                              select k;
+            return View(queryResult.FirstOrDefault());
+        }
+        [MedewerkersFilter]
+        public ActionResult Edited(int KlantNummer, string Voornaam, string tussenvoegsel, string Achternaam, string Geslacht, string Adres, string Postcode, string Woonplaats, string Email)
+        {
+            var query = from klant in context.Klantens
+                        where klant.KlantNummer == KlantNummer
+                        select klant;
+            foreach (var klant in query)
+            {
+                klant.KlantNummer = KlantNummer;
+                klant.Voornaam = Voornaam;
+                klant.tussenvoegsel = tussenvoegsel;
+                klant.Achternaam = Achternaam;
+                klant.Geslacht = Geslacht;
+                klant.Adres = Adres;
+                klant.Postcode = Postcode;
+                klant.Woonplaats = Woonplaats;
+                klant.Email = Email;
+            }
+            context.SubmitChanges();
+
+            var allGuests = from guest in context.Klantens
+                           select guest;
+            return View("GastOverzicht", allGuests);
         }
     }
 }

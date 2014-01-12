@@ -46,9 +46,9 @@
                         <td>@boeking.Einddatum</td>
                         <td>@boeking.Boeking_KlantNr</td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | 
+                            @Html.ActionLink("Edit", "Edit", new { boekingsNr = boeking.BoekingsNr}) | 
                             @Html.ActionLink("Delete", "Delete", new { boekingsNr=boeking.BoekingsNr }) | 
-                            @Html.ActionLink("Klant Details", "Details", "Gast")
+                            @Html.ActionLink("Klant Details", "Details", "Gast", new { klantNr = boeking.Boeking_KlantNr }, null)
                         </td>
                     </tr>
                 }
