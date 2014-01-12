@@ -23,29 +23,35 @@
             <h2>@ViewBag.Title</h2>
             <p>Hier kun je een nieuwe boeking aanmaken</p>
 
-            @using (Html.BeginForm())
-            { 
+            @using (Html.BeginForm("Created", "Boeking", FormMethod.Post))
+			{ 
+				@Html.AntiForgeryToken()
+				@Html.ValidationSummary(true)       
                 <fieldset>
 	                <legend>Nieuwe boeking aanmaken</legend>
                     
 	                <p>
                         Kamernummer
-                        @Html.EditorFor(model => model.KamerNummer)
+                        @Html.DropDownList("Boeking_KamerNr", new SelectList((System.Collections.IEnumerable)ViewData["KamerList"]))
+                        @Html.ValidationMessageFor(model => model.KamerNummer)
 	                </p>
 
                     <p>
                         KlantID
-                        @Html.EditorFor(model => model.KlantID)
+                        @Html.DropDownList("Boeking_KlantNr", new SelectList((System.Collections.IEnumerable)ViewData["KlantList"]))
+                        @Html.ValidationMessageFor(model => model.KlantID)
                     </p>
 
                     <p>
                         Startdatum
                         @Html.EditorFor(model => model.Startdatum)
+                        @Html.ValidationMessageFor(model => model.Startdatum)
                     </p>
 
                     <p>
                         Einddatum
                         @Html.EditorFor(model => model.Einddatum)
+                        @Html.ValidationMessageFor(model => model.Einddatum)
                     </p>
 
                     <p><input type="submit" value="Nieuwe boeking aanmaken" /></p>

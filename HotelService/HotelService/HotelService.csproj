@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="MailHandler\MailerClass.cs" />
     <Compile Include="Models\Boeking.cs" />
+    <Compile Include="Models\BoekingCompositeModel.cs" />
     <Compile Include="Models\Gast.cs" />
     <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\Kamer.cs" />
@@ -191,6 +192,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Boeking\Created.cshtml" />
     <None Include="Views\Boeking\Delete.cshtml" />
     <Content Include="Views\Gast\Create.cshtml" />
     <Content Include="Views\Gast\Delete.cshtml" />

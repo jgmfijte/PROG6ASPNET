@@ -46,9 +46,42 @@ namespace HotelService.Controllers
         }
 
         public ActionResult Create()
-        {
+        { 
+            List<object> kamerList = new List<object>();
+            List<object> klantList = new List<object>();
+
+            foreach (var kamer in context.Hotelkamers)
+            {
+                kamerList.Add(kamer.KamerNummer);
+            }
+
+            foreach (var klant in context.Klantens)
+            {
+                klantList.Add(klant.KlantNummer);
+            }
+            
+            ViewData["KamerList"] = kamerList;
+            ViewData["KlantList"] = klantList;
+     
             return View();
         }
+
+        [MedewerkersFilter]
+        [HttpPost]
+        public ActionResult Created(DataAccessLayer.Boekingen boeking)
+        {
+            if (ModelState.IsValid)
+            {
+                boeking.Status = "In Behandeling";
+
+                context.Boekingens.InsertOnSubmit(boeking);                
+                context.SubmitChanges();
+                return View();
+            }
+            //invoeren in db
+            return View("Create", boeking);
+        }
+
         [MedewerkersFilter]
         public ActionResult Edit()
         {
