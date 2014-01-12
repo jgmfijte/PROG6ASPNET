@@ -90,7 +90,6 @@ namespace HotelService.Controllers
      
             return View();
         }
-<<<<<<< .merge_file_a06260
 
         [MedewerkersFilter]
         [HttpPost]
@@ -98,6 +97,10 @@ namespace HotelService.Controllers
         {
             if (ModelState.IsValid)
             {
+                var Kamer = context.Hotelkamers.Where(k => k.KamerNummer == boeking.Boeking_KamerNr).FirstOrDefault();
+                boeking.Prijs = Kamer.ActuelePrijs;
+                int maxBoeking = context.Boekingens.Max(u => u.BoekingsNr);
+                boeking.BoekingsNr = maxBoeking + 1;
                 boeking.Status = "In Behandeling";
 
                 context.Boekingens.InsertOnSubmit(boeking);                
@@ -113,9 +116,7 @@ namespace HotelService.Controllers
         {
             return View();
         }
-=======
-        
->>>>>>> .merge_file_a03964
+
         [MedewerkersFilter]
         public ActionResult Delete(int boekingsNr)
         {

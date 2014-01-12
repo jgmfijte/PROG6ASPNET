@@ -1,0 +1,65 @@
+﻿@model HotelService.Models.Gebruiker
+@{
+	ViewBag.Title = "Nieuwe Boeking";
+}
+
+<link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+<div id="wrapper">
+	<div id="headerwrap">
+		<div id="header"> <h1> HotelService </h1></div>
+	</div>
+	<div id="menuwrap">
+		<div id="menu">
+			<p> 
+				@Html.ActionLink("Home", "KlantIndex", "Home") | 
+				@Html.ActionLink("Bekijk onze kamers", "KamerOverzicht", "Kamer") | 
+				@Html.ActionLink("Bekijk uw vorige boekingen", "KlantBoekingOverzicht", "Boeking") | 
+				@Html.ActionLink("Log uit", "Logoff", "Home")
+			</p>
+		</div>
+	</div>
+	<div id="contentwrap">
+		<div id="content">    
+			<h2>@ViewBag.Title</h2>
+			<p>Hier kun je een nieuwe gebruiker aanmaken</p>
+
+			@using (Html.BeginForm("Created", "Gebruiker", FormMethod.Post))
+			{ 
+				@Html.AntiForgeryToken()
+				@Html.ValidationSummary(true)       
+				<fieldset>
+					<legend>Nieuwe gebruiker aanmaken</legend>
+					
+					<p>
+						Voornaam
+						@Html.EditorFor(model => model.Voornaam)
+						@Html.ValidationMessageFor(model => model.Voornaam)
+					</p>
+
+                    <p>
+                        Tussenvoegsel
+                        @Html.EditorFor(model => model.Tussenvoegsel)
+                        @Html.ValidationMessageFor(model => model.Tussenvoegsel)
+                    </p>
+
+					<p>
+						Achternaam
+						@Html.EditorFor(model => model.Achternaam)
+						@Html.ValidationMessageFor(model => model.Achternaam)
+					</p>
+
+                    <p>
+                        Wachtwoord
+                        @Html.PasswordFor(model => model.Wachtwoord)
+                        @Html.ValidationMessageFor(model => model.Wachtwoord)
+                    </p>
+                   
+					<p><input type="submit" value="Nieuwe gebruiker aanmaken" /></p>
+				</fieldset>
+			}
+		</div>
+	</div>
+	<div id="footerwrap">
+		<div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+	</div>
+</div>

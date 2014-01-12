@@ -33,13 +33,25 @@
 	                <p>
                         Kamernummer
                         @Html.DropDownList("Boeking_KamerNr", new SelectList((System.Collections.IEnumerable)ViewData["KamerList"]))
-                        @Html.ValidationMessageFor(model => model.KamerNummer)
+                        @Html.ValidationMessageFor(model => model.Boeking_KamerNr)
 	                </p>
 
                     <p>
                         KlantID
                         @Html.DropDownList("Boeking_KlantNr", new SelectList((System.Collections.IEnumerable)ViewData["KlantList"]))
-                        @Html.ValidationMessageFor(model => model.KlantID)
+                        @Html.ValidationMessageFor(model => model.Boeking_KlantNr)
+                    </p>
+
+                    <p>
+                        Factuuradres
+                        @Html.EditorFor(model => model.FactuurAdres)
+                        @Html.ValidationMessageFor(model => model.FactuurAdres)
+                    </p>
+
+                    <p>
+                        Bankrekening
+                        @Html.EditorFor(model => model.Bankrekening)
+                        @Html.ValidationMessageFor(model => model.FactuurAdres)
                     </p>
 
                     <p>

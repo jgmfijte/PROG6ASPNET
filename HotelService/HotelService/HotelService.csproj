@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BoekingController.cs" />
     <Compile Include="Controllers\GastController.cs" />
+    <Compile Include="Controllers\GebruikerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KamerController.cs" />
     <Compile Include="Filters\KlantFilter.cs" />
@@ -124,7 +125,6 @@
     </Compile>
     <Compile Include="MailHandler\MailerClass.cs" />
     <Compile Include="Models\Boeking.cs" />
-    <Compile Include="Models\BoekingCompositeModel.cs" />
     <Compile Include="Models\Gast.cs" />
     <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\Kamer.cs" />
@@ -211,6 +211,8 @@
     <Content Include="Views\Boeking\Deleted.cshtml" />
     <Content Include="Views\Gast\Deleted.cshtml" />
     <Content Include="Views\Kamer\Deleted.cshtml" />
+    <Content Include="Views\Gebruiker\Create.cshtml" />
+    <Content Include="Views\Gebruiker\Created.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
