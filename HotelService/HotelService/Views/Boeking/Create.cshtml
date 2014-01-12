@@ -23,13 +23,13 @@
             <h2>@ViewBag.Title</h2>
             <p>Hier kun je een nieuwe boeking aanmaken</p>
 
-            @using (Html.BeginForm("Created", "Boeking", FormMethod.Post))
+            @using (Html.BeginForm("FinishBoeking", "Boeking", FormMethod.Post))
 			{ 
 				@Html.AntiForgeryToken()
 				@Html.ValidationSummary(true)       
                 <fieldset>
 	                <legend>Nieuwe boeking aanmaken</legend>
-                    
+ 
 	                <p>
                         Kamernummer
                         @Html.DropDownList("Boeking_KamerNr", new SelectList((System.Collections.IEnumerable)ViewData["KamerList"]))
@@ -41,19 +41,6 @@
                         @Html.DropDownList("Boeking_KlantNr", new SelectList((System.Collections.IEnumerable)ViewData["KlantList"]))
                         @Html.ValidationMessageFor(model => model.Boeking_KlantNr)
                     </p>
-
-                    <p>
-                        Factuuradres
-                        @Html.EditorFor(model => model.FactuurAdres)
-                        @Html.ValidationMessageFor(model => model.FactuurAdres)
-                    </p>
-
-                    <p>
-                        Bankrekening
-                        @Html.EditorFor(model => model.Bankrekening)
-                        @Html.ValidationMessageFor(model => model.FactuurAdres)
-                    </p>
-
                     <p>
                         Startdatum
                         @Html.EditorFor(model => model.Startdatum)
@@ -66,7 +53,7 @@
                         @Html.ValidationMessageFor(model => model.Einddatum)
                     </p>
 
-                    <p><input type="submit" value="Nieuwe boeking aanmaken" /></p>
+                    <p><input type="submit" value="Vraag de prijs op" /></p>
                 </fieldset>
             }
         </div>

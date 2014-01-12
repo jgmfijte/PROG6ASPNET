@@ -41,6 +41,9 @@ namespace HotelService.Controllers
             context.SubmitChanges();
             context.Klantens.InsertOnSubmit(klant);
             context.SubmitChanges();
+
+            MailHandler.MailerClass.Instance.SendMail(klant.Email, "Uw account is aangemaakt!", "Welkom bij ons hotelservice systeem! Uw account is aangemaakt onder id " + klant.userID + " en uw wachtwoord daarbij is " + klant.password + ". Hiermee kunt u inloggen op de website.");
+
             return View();
         }       
     }

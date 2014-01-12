@@ -47,6 +47,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -132,6 +133,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ValutaServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ValutaService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -139,6 +146,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\StyleSheet.css" />
     <Content Include="Global.asax" />
+    <None Include="Service References\ValutaServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ValutaServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ValutaServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -147,6 +160,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Boeking\FinishBoeking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -191,6 +205,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Views\Boeking\Created.cshtml" />
+    <None Include="Service References\ValutaServiceReference\Service1.wsdl" />
+    <None Include="Service References\ValutaServiceReference\ValutaService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ValutaServiceReference\ValutaService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ValutaServiceReference\ValutaService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Services\output.config" />
     <None Include="Views\Boeking\Delete.cshtml" />
     <Content Include="Views\Gast\Create.cshtml" />
     <Content Include="Views\Gast\Delete.cshtml" />
@@ -211,6 +236,15 @@
     <Content Include="Views\Kamer\Deleted.cshtml" />
     <Content Include="Views\Klant\Create.cshtml" />
     <Content Include="Views\Klant\Created.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ValutaServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

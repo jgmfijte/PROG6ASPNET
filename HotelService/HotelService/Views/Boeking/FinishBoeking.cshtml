@@ -1,0 +1,76 @@
+﻿@model DataAccessLayer.Boekingen
+@{
+    ViewBag.Title = "Nieuwe Boeking";
+}
+
+<link href="../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+<div id="wrapper">
+    <div id="headerwrap">
+        <div id="header"> <h1> HotelService </h1></div>
+    </div>
+    <div id="menuwrap">
+        <div id="menu">
+            <p>
+                @Html.ActionLink("Home", "KlantIndex", "Home") |
+                @Html.ActionLink("Bekijk onze kamers", "KamerOverzicht", "Kamer") |
+                @Html.ActionLink("Bekijk uw vorige boekingen", "KlantBoekingOverzicht", "Boeking") |
+                @Html.ActionLink("Log uit", "Logoff", "Home")
+            </p>
+        </div>
+    </div>
+    <div id="contentwrap">
+        <div id="content">
+            <h2>@ViewBag.Title</h2>
+            <p>Hier kun je een nieuwe boeking aanmaken</p>
+            @{                     
+                HotelService.ValutaServiceReference.ValutaServiceClient ServiceClient = new HotelService.ValutaServiceReference.ValutaServiceClient();
+
+                double convertedToUSD = ServiceClient.GetConvertedValuta((int)ViewBag.Boeking.Prijs, "USD");
+                double convertedToJPY = ServiceClient.GetConvertedValuta((int)ViewBag.Boeking.Prijs, "JPY");
+            }
+
+            @using (Html.BeginForm("Created", "Boeking", FormMethod.Post))
+            {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+                 
+            <fieldset>
+                <legend>Nieuwe boeking aanmaken</legend>
+
+                
+
+                Je hebt zojuist gekozen voor een boeking met de startdatum: @ViewBag.Boeking.Startdatum en de einddatum: @ViewBag.Boeking.Einddatum.
+
+                Je hebt hierbij ook gekozen voor de kamer met nummer @ViewBag.Boeking.Boeking_KamerNr.<br /><br />
+
+                De totale prijs zal uitkomen op: <br />
+                EUR: @ViewBag.Boeking.Prijs<br />
+                USD: @convertedToUSD<br />
+                JPY: @convertedToJPY<br /><br />
+
+                Om te boeken hebben we nog enkele gegevens nodig:<br />
+                
+                <p>
+                Factuuradres
+                @Html.EditorFor(model => model.FactuurAdres)
+                @Html.ValidationMessageFor(model => model.FactuurAdres)
+                </p>
+
+                <p>
+                Bankrekening
+                @Html.EditorFor(model => model.Bankrekening)
+                @Html.ValidationMessageFor(model => model.Bankrekening)
+                </p>               
+
+                
+            }
+
+                <p><input type="submit" value="Boek nu!" /></p>
+            </fieldset>
+            }
+        </div>
+    </div>
+    <div id="footerwrap">
+        <div id="footer"> <p>Martijn de Fijter en Suzanne Jenniskens - 2013/2014 - 42IN06SOc</p></div>
+    </div>
+</div>

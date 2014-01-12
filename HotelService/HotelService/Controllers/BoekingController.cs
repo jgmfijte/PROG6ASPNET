@@ -97,8 +97,6 @@ namespace HotelService.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Kamer = context.Hotelkamers.Where(k => k.KamerNummer == boeking.Boeking_KamerNr).FirstOrDefault();
-                boeking.Prijs = Kamer.ActuelePrijs;
                 int maxBoeking = context.Boekingens.Max(u => u.BoekingsNr);
                 boeking.BoekingsNr = maxBoeking + 1;
                 boeking.Status = "In Behandeling";
@@ -108,7 +106,25 @@ namespace HotelService.Controllers
                 return View();
             }
             //invoeren in db
+
+            MailHandler.MailerClass.Instance.SendMail(context.Klantens.FirstOrDefault(k => k.KlantNummer == boeking.Boeking_KlantNr).Email, "Uw boeking", "Gefeliciteerd met uw boeking! Uw boeking heeft het nummer " + boeking.BoekingsNr + " gekregen. Vermeld bij correspondentie altijd dat nummer. Tevens wordt het bedrag van " + boeking.Prijs + " van rekening " + boeking.Bankrekening + " afgeschreven over enkele dagen. De factuur wordt verzonden naar " + boeking.FactuurAdres + ". Wij wensen u een prettig verblijf toe op kamer " + boeking.Boeking_KamerNr + ". U heeft de kamer tot uw beschikking vanaf " + boeking.Startdatum + " tot " + boeking.Einddatum + ". Wij hopen u binnenkort te mogen verwelkomen in ons hotel. Tot ziens!");
+
             return View("Create", boeking);
+        }
+
+        [MedewerkersFilter]
+        [HttpPost]
+        public ActionResult FinishBoeking(DataAccessLayer.Boekingen boeking)
+        {
+            if (ModelState.IsValid)
+            {
+                var Kamer = context.Hotelkamers.Where(k => k.KamerNummer == boeking.Boeking_KamerNr).FirstOrDefault();
+                var aantalDagen = boeking.Einddatum - boeking.Startdatum;
+                boeking.Prijs = Kamer.ActuelePrijs * aantalDagen.Days;
+            }
+            ViewBag.Boeking = boeking;
+
+            return View("FinishBoeking");
         }
 
         [MedewerkersFilter]

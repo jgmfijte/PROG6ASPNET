@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelService", "HotelService\HotelService.csproj", "{C8BDE41B-C5EE-4B62-B669-62629B9FE606}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0F83095-319B-4F8C-995A-D8C145EE1093} = {D0F83095-319B-4F8C-995A-D8C145EE1093}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelService.Tests", "HotelService.Tests\HotelService.Tests.csproj", "{46A32D43-0986-4876-A928-C327378CF5BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{EE7D00B8-BCED-4679-B923-867C29E38194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyService", "CurrencyService\CurrencyService.csproj", "{D0F83095-319B-4F8C-995A-D8C145EE1093}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +32,10 @@ Global
 		{EE7D00B8-BCED-4679-B923-867C29E38194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE7D00B8-BCED-4679-B923-867C29E38194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE7D00B8-BCED-4679-B923-867C29E38194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0F83095-319B-4F8C-995A-D8C145EE1093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F83095-319B-4F8C-995A-D8C145EE1093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F83095-319B-4F8C-995A-D8C145EE1093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F83095-319B-4F8C-995A-D8C145EE1093}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
