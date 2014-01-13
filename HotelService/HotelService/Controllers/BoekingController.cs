@@ -3,6 +3,7 @@ using HotelService.Filters;
 using HotelService.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -101,15 +102,14 @@ namespace HotelService.Controllers
                 boeking.BoekingsNr = maxBoeking + 1;
                 boeking.Status = "In Behandeling";
 
-                context.Boekingens.InsertOnSubmit(boeking);                
+                context.Boekingens.InsertOnSubmit(boeking);
                 context.SubmitChanges();
-                return View();
             }
             //invoeren in db
 
             MailHandler.MailerClass.Instance.SendMail(context.Klantens.FirstOrDefault(k => k.KlantNummer == boeking.Boeking_KlantNr).Email, "Uw boeking", "Gefeliciteerd met uw boeking! Uw boeking heeft het nummer " + boeking.BoekingsNr + " gekregen. Vermeld bij correspondentie altijd dat nummer. Tevens wordt het bedrag van " + boeking.Prijs + " van rekening " + boeking.Bankrekening + " afgeschreven over enkele dagen. De factuur wordt verzonden naar " + boeking.FactuurAdres + ". Wij wensen u een prettig verblijf toe op kamer " + boeking.Boeking_KamerNr + ". U heeft de kamer tot uw beschikking vanaf " + boeking.Startdatum + " tot " + boeking.Einddatum + ". Wij hopen u binnenkort te mogen verwelkomen in ons hotel. Tot ziens!");
-
-            return View("Create", boeking);
+               
+            return View();
         }
 
         [MedewerkersFilter]
@@ -120,6 +120,8 @@ namespace HotelService.Controllers
             {
                 var Kamer = context.Hotelkamers.Where(k => k.KamerNummer == boeking.Boeking_KamerNr).FirstOrDefault();
                 var aantalDagen = boeking.Einddatum - boeking.Startdatum;
+                //boeking.Startdatum = DateTime.ParseExact(boeking.Startdatum.ToString(), "dd-MM-YYYY", CultureInfo.InvariantCulture);
+                //boeking.Einddatum = DateTime.ParseExact(boeking.Einddatum.ToString(), "dd-MM-YYYY", CultureInfo.InvariantCulture);
                 boeking.Prijs = Kamer.ActuelePrijs * aantalDagen.Days;
             }
             ViewBag.Boeking = boeking;

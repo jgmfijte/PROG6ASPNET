@@ -62,8 +62,11 @@
                 @Html.ValidationMessageFor(model => model.Bankrekening)
                 </p>               
 
-                
-            }
+                @Html.HiddenFor(m => m.Prijs, new { Value = ViewBag.Boeking.Prijs })
+                @Html.HiddenFor(m => m.Startdatum, new { Value = ViewBag.Boeking.Startdatum.ToString() })
+                @Html.HiddenFor(m => m.Einddatum, new { Value = ViewBag.Boeking.Einddatum.ToString() })
+                @Html.HiddenFor(m => m.Boeking_KamerNr, new { Value = ViewBag.Boeking.Boeking_KamerNr })
+                @Html.HiddenFor(m => m.Boeking_KlantNr, new { Value = ViewBag.Boeking.Boeking_KlantNr })
 
                 <p><input type="submit" value="Boek nu!" /></p>
             </fieldset>
