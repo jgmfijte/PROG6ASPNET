@@ -92,7 +92,7 @@ namespace HotelService.Controllers
             return View();
         }
 
-        [MedewerkersFilter]
+        //[MedewerkersFilter]
         [HttpPost]
         public ActionResult Created(DataAccessLayer.Boekingen boeking)
         {
@@ -108,11 +108,11 @@ namespace HotelService.Controllers
             //invoeren in db
 
             MailHandler.MailerClass.Instance.SendMail(context.Klantens.FirstOrDefault(k => k.KlantNummer == boeking.Boeking_KlantNr).Email, "Uw boeking", "Gefeliciteerd met uw boeking! Uw boeking heeft het nummer " + boeking.BoekingsNr + " gekregen. Vermeld bij correspondentie altijd dat nummer. Tevens wordt het bedrag van " + boeking.Prijs + " van rekening " + boeking.Bankrekening + " afgeschreven over enkele dagen. De factuur wordt verzonden naar " + boeking.FactuurAdres + ". Wij wensen u een prettig verblijf toe op kamer " + boeking.Boeking_KamerNr + ". U heeft de kamer tot uw beschikking vanaf " + boeking.Startdatum + " tot " + boeking.Einddatum + ". Wij hopen u binnenkort te mogen verwelkomen in ons hotel. Tot ziens!");
-               
+            
             return View();
         }
 
-        [MedewerkersFilter]
+        //[MedewerkersFilter]
         [HttpPost]
         public ActionResult FinishBoeking(DataAccessLayer.Boekingen boeking)
         {

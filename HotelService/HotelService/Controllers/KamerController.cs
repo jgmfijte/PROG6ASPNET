@@ -20,7 +20,7 @@ namespace HotelService.Controllers
         {
             return View();
         }
-        [KlantFilter]
+        //[KlantFilter]
         public ActionResult KlantKamerOverzicht()
         {
             var result =
